@@ -290,59 +290,59 @@ function cardDecryption(source) {
 
 	var card = 0;
 
-	if (source == "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\AC.png") {
+	if (source == "PNG\\AC.png") {
 		card = 1;
 	}
 
-	else if (source == "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\2C.png") {
+	else if (source == "PNG\\2C.png") {
 		card = 2;
 	}
 
-	else if (source == "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\3C.png") {
+	else if (source == "PNG\\3C.png") {
 		card = 3;
 	}
 
-	else if (source == "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\4C.png") {
+	else if (source == "PNG\\4C.png") {
 		card = 4;
 	}
 
-	else if (source == "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\5C.png") {
+	else if (source == "PNG\\5C.png") {
 		card = 5;
 	}
 
-	else if (source == "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\6C.png") {
+	else if (source == "PNG\\6C.png") {
 		card = 6;
 	}
 
-	else if (source == "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\7C.png") {
+	else if (source == "PNG\\7C.png") {
 		card = 7;
 	}
 
-	else if (source == "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\8C.png") {
+	else if (source == "PNG\\8C.png") {
 		card = 8;
 	}
 
-	else if (source == "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\9C.png") {
+	else if (source == "PNG\\9C.png") {
 		card = 9;
 	}
 
-	else if (source == "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\10C.png") {
+	else if (source == "PNG\\10C.png") {
 		card = 10;
 	}
 
-	else if (source == "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\JC.png") {
+	else if (source == "PNG\\JC.png") {
 		card = 11;
 	}
 
-	else if (source == "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\QC.png") {
+	else if (source == "PNG\\QC.png") {
 		card = 12;
 	}
 
-	else if (source == "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\KC.png") {
+	else if (source == "PNG\\KC.png") {
 		card = 13;
 	}
 
-	else if (source == "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\gray_back.png") {
+	else if (source == "PNG\\gray_back.png") {
 		card = 14;
 	}
 
@@ -354,59 +354,59 @@ function cardEncryption(val) {
 	var src = "";
 
 	if (val == "A") {
-		src = "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\AC.png";
+		src = "PNG\\AC.png";
 	}
 
 	else if (val == "2") {
-		src = "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\2C.png";
+		src = "PNG\\2C.png";
 	}
 
 	else if (val == "3") {
-		src = "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\3C.png";
+		src = "PNG\\3C.png";
 	}
 
 	else if (val == "4") {
-		src = "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\4C.png";
+		src = "PNG\\4C.png";
 	}
 
 	else if (val == "5") {
-		src = "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\5C.png";
+		src = "PNG\\5C.png";
 	}
 
 	else if (val == "6") {
-		src = "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\6C.png";
+		src = "PNG\\6C.png";
 	}
 	
 	else if (val == "7") {
-		src = "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\7C.png";
+		src = "PNG\\7C.png";
 	}
 	
 	else if (val == "8") {
-		src = "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\8C.png";
+		src = "PNG\\8C.png";
 	}
 	
 	else if (val == "9") {
-		src = "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\9C.png";
+		src = "PNG\\9C.png";
 	}
 	
 	else if (val == "T") {
-		src = "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\10C.png";
+		src = "PNG\\10C.png";
 	}
 	
 	else if (val == "J") {
-		src = "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\JC.png";
+		src = "PNG\\JC.png";
 	}
 	
 	else if (val == "Q") {
-		src = "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\QC.png";
+		src = "PNG\\QC.png";
 	}
 	
 	else if (val == "K") {
-		src = "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\KC.png";
+		src = "PNG\\KC.png";
 	}
 
 	else if (val == ".") {
-		src = "C:\\Users\\Chip\\Documents\\Chip-Documents\\Programming\\Udemy-WebDev\\Personal Project\\Games Website\\Solitaire\\PNG\\gray_back.png"
+		src = "PNG\\gray_back.png"
 	}
 
 	else if (val == "-") {
