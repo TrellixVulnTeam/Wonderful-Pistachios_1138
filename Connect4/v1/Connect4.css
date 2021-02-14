@@ -1,0 +1,76 @@
+
+body {
+	background: black;
+}
+
+table {
+	padding-top: 5px;
+	border-spacing: 3px;
+	margin: auto;
+}
+
+h1 {
+	margin: 0;
+	background: #19fff3;
+	color: white;
+	width: 100% - 6px;
+	text-align: center;
+	height: 60px;
+	line-height: 60px;
+	font-size: 50px;
+	border: 3px solid gray;
+}
+
+td {
+	width: 75px;
+	height: 75px;
+	background: white;
+	border-radius: 50%;
+	border: 3px solid black;
+}
+
+.playerTurn {
+	background: green;
+	color: white;
+}
+
+#leftDiv {
+	float: left;
+	width: 25%;
+	height: 890px;
+	background: linear-gradient(to right, #f1f2b5 90%, #135058);
+}
+
+#midDiv {
+	float: left;
+	width: 50%;
+	height: 890px;
+	background: blue;
+}
+
+#rightDiv {
+	float: left;
+	width: 25%;
+	height: 890px;
+	background: linear-gradient(to left, #f1f2b5 90%, #135058);
+}
+
+#bottomTextBox {
+	background: white;
+	width: 85%;
+	height: 140px;
+	margin: auto;
+	margin-top: 15px;
+	border-radius: 15px;
+}
+
+#bottomTextBox p {
+	font-size: 30px;
+	text-align: center;
+	padding-top: 50px;
+}
+
+#rightDiv div {
+	width: 100%;
+	height: 445px;
+}

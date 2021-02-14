@@ -1,0 +1,207 @@
+body {
+	 background: linear-gradient(to right, #e53935, #e35d5b);
+}
+
+img {
+
+	position: absolute;
+}
+
+img:hover {
+	background: #19fff3;
+	border: 2px solid #19fff3;
+	border-radius: 12px;
+}
+
+button {
+	float: left;
+	width: 120px;
+	margin-left: 10px;
+	line-height: 50px;
+	background: white;
+	color: #e53935;
+	font-size: 30px;
+	font-family: roboto;
+	font-weight: bold;
+	border: none;
+	border-radius: 10px;
+}
+
+button:hover {
+	border: 3px solid #19fff3;
+	height: 52px;
+	line-height: 44px;
+	padding-bottom: 6px;
+}
+
+button:focus {
+
+	outline: none;
+}
+
+time {
+	font-size: 60px;
+	line-height: 50px;
+	color: white;
+	font-weight: bold;
+	letter-spacing: 2px;
+}
+
+.selected {
+	background: #19fff3;
+	border: 2px solid #19fff3;
+	border-radius: 8px;
+}
+
+.hintHighlight {
+	background: #19fff3;
+	border: 4px solid #19fff3;
+	border-radius: 12px;
+}
+
+#container {
+	position: absolute;
+	left: 0px;
+	top: 47px;
+	width: 100%;
+	height: 90%;
+	background: #17b53e;
+	margin-top: 30px;
+	border-top: 10px solid #17b53e;
+	outline: 6px solid white;
+}
+
+#header {
+	display: inline-block;
+	width: 1050px;
+	float: center;
+}
+
+#title {
+	float: left;
+	width: 250px;
+}
+
+#title h1 {
+	padding: 0 5px;
+	line-height: 50px;
+	font-size: 60px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: white;
+}
+
+#buttons {
+	float: left;
+	width: 650px;
+}
+
+#time {
+	float: left;
+	width: 150px;
+}
+
+#start {
+
+	width: 200px;
+}
+
+#winner {
+	font-size: 200px;
+	text-align: center;
+	margin-top: 50px;
+	margin-left: 80px;
+	margin-right: 80px;
+	line-height: 700px;
+	color: #47e8f7;
+	background: white;
+	border-radius: 30px;
+}
+
+#errorMessage {
+	font-size: 40px;
+	text-align: center;
+	line-height: 60px;
+	color: #47e8f7;
+	background: white;
+	border-radius: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	width: 500px;
+
+	position: absolute;
+	z-index: 30;
+}
+
+/*Column Spacing*/
+
+	#col1 {
+		position: absolute;
+		left: 1%;
+		float: left;
+		height: 600px;
+	}
+
+	#col2 {
+		position: absolute;
+		left: 11%;
+		float: left;
+		height: 600px;
+	}
+
+	#col3 {
+		position: absolute;
+		left: 21%;
+		float: left;
+		height: 600px;
+	}
+
+	#col4 {
+		position: absolute;
+		left: 31%;
+		float: left;
+		height: 600px;
+	}
+
+	#col5 {
+		position: absolute;
+		left: 41%;
+		float: left;
+		height: 600px;
+	}
+
+	#col6 {
+		position: absolute;
+		left: 51%;
+		float: left;
+		height: 600px;
+	}
+
+	#col7 {
+		position: absolute;
+		left: 61%;
+		float: left;
+		height: 600px;
+	}
+
+	#col8 {
+		position: absolute;
+		left: 71%;
+		float: left;
+		height: 600px;
+	}
+
+	#col9 {
+		position: absolute;
+		left: 81%;
+		float: left;
+		height: 600px;
+	}
+
+	#col10 {
+		position: absolute;
+		left: 91%;
+		float: left;
+		height: 600px;
+	}
+/*End of Column Spacing*/
