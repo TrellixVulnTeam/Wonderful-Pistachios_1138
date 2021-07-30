@@ -1,0 +1,221 @@
+#mainNav {
+  background-color: #00a82d;
+}
+
+#mainNav .logo {
+  background-color: white;
+  padding: 5px 10px;
+}
+
+#mainNav a {
+  color: white;
+}
+
+#mainNav a:hover {
+  background-color: white;
+  color: #00a82d;
+  border-radius: 3px;
+}
+
+#mainNav a.dropdown-item {
+  background-color: white;
+  color: #00a82d;
+  margin: 0;
+}
+
+#mainNav a.dropdown-item:hover {
+  background-color: #00a82d;
+  color: white;
+}
+
+#mainNav .dropdown:hover .dropdown-menu{
+  display: block;
+  margin-top: 0;
+}
+
+#mainNav p {
+  font-size: 1em;
+  margin-bottom: 0;
+  color: #737373;
+}
+
+#mainNav .dropdown-item:hover p {
+  color: black;
+}
+
+#feature-dd .dropdown-item {
+  height: 5rem;
+  width: 22rem;
+  display: flex;
+  flex-direction: row;
+}
+
+#plans-dd .dropdown-item {
+  height: 6rem;
+  width: 20rem;
+  font-size: 1em;
+}
+
+#teams-dd .dropdown-item {
+  height: 2.5rem;
+  width: 15rem;
+  font-size: 1.25em;
+  line-height: 1.5em;
+}
+
+#teams-dd .dropdown-item:hover {
+  letter-spacing: .3rem;
+  text-transform: capitalize;
+}
+
+/* ===================== */
+
+#frontPage {
+  font-size: 1.5em;
+  border: 1px solid black;
+}
+
+#frontPage:hover {
+  outline: 3px solid #00a82d;
+}
+
+#frontPage h1{
+  font-size: 2.5em;
+}
+
+#frontPage a {
+  width: 15rem;
+  height: 5rem;
+  font-size: 1em;
+  line-height: 2.5em;
+  background-color: #00a82d;
+  color: white;
+}
+
+#frontPage a:hover {
+  background-color: white;
+  color: #00a82d;
+  border: 2px solid black;
+}
+
+/* ========================== */
+
+#cards h1 {
+  color: #00a82d;
+  font-size: 3em;
+}
+
+#cards p {
+  font-size: 1.5em;
+}
+
+/* =========================== */
+
+
+#benefitList li {
+  list-style-type: none;
+  margin: 1rem 0;
+  font-size: 1.5em;
+}
+
+/* ============================ */
+
+#teamsFeatures a {
+  text-decoration: none;
+  color: #737373;
+}
+
+#teamsFeatures span {
+  color: #00a82d;
+}
+
+#teamsFeatures .col-3 {
+  text-decoration: none;
+  padding-top: 10px;
+  margin: 2em auto;
+}
+
+#teamsFeatures .col-3:hover {
+  background: #f7f7f7;
+}
+
+/* ============================= */
+
+#freeTrial {
+  background-color: #f7f7f7;
+}
+
+#freeTrial a {
+  background-color: #00a82d;
+  color: white;
+  font-size: 1.5em;
+  width: 20rem;
+  height: 4rem;
+  line-height: 3rem;
+}
+
+#freeTrial a:hover {
+  background-color: white;
+  color: #00a82d;
+  border: 2px solid black;
+}
+
+/* ============================== */
+
+#footer ul {
+  list-style-type: none;
+}
+
+#footer li {
+  margin: 5px auto;
+}
+
+#footer li:hover {
+  background-color: #f7f7f7;
+}
+
+#footer a {
+  text-decoration: none;
+  color: black;
+}
+
+#footer span {
+  font-weight: 700;
+}
+
+/* ============================ */
+
+#subFooter {
+  margin-top: 5rem;
+}
+
+#subFooter img {
+  width: 3rem;
+  height: 3rem;
+}
+
+#subFooter .dropdown-menu {
+  width: 97%;
+}
+
+#subFooter .col-6 a {
+  text-decoration: none;
+  color: #000;
+}
+
+#subFooter li:hover {
+  background: #6c757d;
+}
+
+#subFooter li:hover a {
+  color: white;
+}
+
+/* ============================ */
+
+.laptop-animation {
+  height: 30rem;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
