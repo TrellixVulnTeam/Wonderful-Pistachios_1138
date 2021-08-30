@@ -4,25 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudoku</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div id="root-div">
-        <div id="left-div">
-            <div class="title">
-                <h1>Sudoku</h1>
+    <div class="container">
+        <div class="info">
+            <h1 class="info__title">Sudoku</h1>
+            <div class="info__difficulty">
+                <button href="#" class="info__difficulty-btn btn-active">Easy</button>
+                <button href="#" class="info__difficulty-btn">Medium</button>
+                <button href="#" class="info__difficulty-btn">Hard</button>
             </div>
+            <div class="info__difficulty">
+                <button href="#" class="info__difficulty-btn">Very Hard</button>
+                <button href="#" class="info__difficulty-btn">Insane</button>
+                <button href="#" class="info__difficulty-btn">Inhuman</button>
+            </div>
+            <button onclick="generateBoard()"  class="btn info__new">New Game</button>
         </div>
-        <div id="center-div">
+        <div class="board">
     
         </div>
-        <div id="right-div">
-            <div class="new-game">
-                <a href="#">New Game</a>
-            </div>
+        <div class="results">
         </div>
     </div>
+    <script src="sudoku.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>
