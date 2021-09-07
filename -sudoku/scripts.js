@@ -1,5 +1,6 @@
 console.log(document.sudoku.generate('easy'));
 let board;
+let solvedBoard;
 
 const difficultyChoice = document.querySelectorAll('.info__difficulty-btn');
 for (let x = 0; x < difficultyChoice.length; x++) {
@@ -14,6 +15,7 @@ for (let x = 0; x < difficultyChoice.length; x++) {
 const generateBoard = () => {
     let difficulty = document.querySelectorAll('.btn-active');
     board = document.sudoku.generate(difficulty[0].innerHTML.toLowerCase());
+    solvedBoard = document.sudoku.solve(board);
     displayValuesBoard();
 }
 
@@ -44,12 +46,24 @@ const getCurrentBoard = () => {
 }
 
 const validateBoard = (obj) => {
+    if (obj.classList.contains('node__incorrect')) {
+        obj.classList.remove('node__incorrect');
+    }
     getCurrentBoard();
-    checkCol(obj.classList[1]);
+    let nodeNum = parseInt(obj.classList[4].substring(1));
+    console.log('Object: ' + obj.value);
+    console.log('Correct Value: ' + solvedBoard.substring(nodeNum, nodeNum+1));
+    if (parseInt(obj.value) == solvedBoard.substring(nodeNum, nodeNum+1)) {
+        nodeFeedbackAnimation(obj.classList[1]); //Col
+        nodeFeedbackAnimation(obj.classList[2]); //Row
+        nodeFeedbackAnimation(obj.classList[3]); //Square
+    } else {
+        obj.classList.add('node__incorrect');
+    }
 }
 
-const checkCol = (colClass) => {
-    let columnNodes = document.querySelectorAll(`.${colClass}`);
+const nodeFeedbackAnimation = (objClass) => {
+    let columnNodes = document.querySelectorAll(`.${objClass}`);
     let curVals = [];
     for (let x = 0; x < 9; x++) {
         if (columnNodes[x].value == '') {}
@@ -57,37 +71,25 @@ const checkCol = (colClass) => {
             curVals.push(columnNodes[x].value);
         }
     }
-    if (checkCompleteSet(curVals) == 'error') {
+
+    let completeSet = true;
+    if (curVals.length == 9) {
         for (let x = 0; x < 9; x++) {
-            columnNodes[x].classList.add('node__incorrect');
-            setTimeout(function () {columnNodes[x].classList.remove('node__incorrect')}, 500);
+            for (let y = 0; y < 9; y++) {
+                if (curVals[x] == curVals[y] && y != x) {
+                    completeSet = false;
+                }
+            }
         }
-    } else if (checkCompleteSet(curVals) == 'complete') {
+    } else {
+        completeSet = false;
+    }
+
+    if (completeSet) {
         for (let x = 0; x < 9; x++) {
             columnNodes[x].classList.add('node__correct');
             setTimeout(function () {columnNodes[x].classList.remove('node__correct')}, 500);
         }
-    }
-}
-
-const checkCompleteSet = (givenVals) => {
-    // check for duplicates if it's full
-    let noDuplicate = true;
-    if (givenVals.length == 9) {
-        for (let x = 0; x < 9; x++) {
-            for (let y = 0; y < 9; y++) {
-                if (givenVals[x] == givenVals[y] && y != x) {
-                    noDuplicate = false;
-                }
-            }
-        }
-        if (!noDuplicate) {
-            return 'error';
-        } else {
-            return 'complete';
-        }
-    } else {
-        return 'incomplete';
     }
 }
 
@@ -125,6 +127,7 @@ const generateBoardHTML = () => {
                     node.className += 's9';
                 }
             }
+            node.className += ` n${(x * 9) + y}`;
             
             node.addEventListener('dblclick',function(){node.value=''});
             node.addEventListener('keypress',

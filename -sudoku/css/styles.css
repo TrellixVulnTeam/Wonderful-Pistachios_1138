@@ -138,9 +138,11 @@ body {
   caret-color: white;
   animation: spinBottomRight 0.5s cubic-bezier(0.87, 0, 0.13, 1); }
   .node__correct {
-    background-color: #75ec75 !important; }
+    background-color: #75ec75 !important;
+    color: white; }
   .node__incorrect {
-    background-color: #fd5a5a !important; }
+    background-color: #fd5a5a !important;
+    color: white; }
   .node:not(.c0) {
     border-left: none; }
   .node:not(.r0) {

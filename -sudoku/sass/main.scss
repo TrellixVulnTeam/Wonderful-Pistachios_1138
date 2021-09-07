@@ -81,10 +81,12 @@
 
     &__correct {
         background-color: rgb(117, 236, 117) !important;
+        color: white;
     }
 
     &__incorrect {
         background-color: rgb(253, 90, 90) !important;
+        color: white;
     }
 
     &:not(.c0) {
