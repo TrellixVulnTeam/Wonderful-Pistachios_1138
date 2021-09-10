@@ -1,5 +1,6 @@
 @import "base/base"; 
 @import "base/animations";
+@import "abstract/variables";
 
 .container {
     height: 100vh;
@@ -7,31 +8,50 @@
     width: 100%;
 }
 
+.divider {
+    margin: 20px 0;
+    background-color: white;
+    border: none;
+    height: 3px;
+}
+
 .info {
     width: 25%;
-    background-color: white;
+    background-color: $color-3;
     text-align: center;
-    border: .3rem solid aqua;
-    border-right: .3rem solid #777;
 
     &__title {
         font-size: 6vw;
         font-weight: 100;
-        line-height: 1.5;
-        background-color: white;
+        line-height: 1;
+        border-radius: 5px;
+        color: white;
+        background-color: #2ee6e6;
+        width: 95%;
+        height: 12vh;
+        margin: 20px auto;
+        border: 3px solid $color-gray-l;
     }
 
-    &__new {
-        font-size: 3.5vw;
-        line-height: 1.5;
-        border: none;
+    &__start {
+        font-size: 2.5vw;
         padding: 5px;
-        background-color: white;
+        width: 80% !important;
+        margin: 10px auto;
+        background-color: $color-2;
+        color: white;
+        border: 3px solid $color-gray-l;
+        border-radius: 100px;
+        transition: all .2s ease-out;
     }
 
     &__difficulty {
         display: flex;
-        width: 100%;
+        width: 95%;
+        margin: 0 auto;
+        border-top: none;
+        border-left: none;
+        border-right: none;
 
         &-btn {
             border: none;
@@ -41,12 +61,16 @@
             font-size: 1.6rem;
             text-decoration: none;
             color: black;
-            width: 33.3333%;
-            background-color: #F8F0E3;
-            background-image: linear-gradient(90deg, transparent 0%, transparent 50%, aqua 50%);
+            width: 30%;
+            margin: 0 calc(10% / 6) ;
+            background-color: white;
+            background-image: linear-gradient(90deg, transparent 0%, transparent 50%, $color-2 50%);
             background-size: 250%;
-            transition: all .4s ease-in;
-
+            transition-property: background, color;
+            transition-duration: .3s;
+            transition-timing-function: ease-in;
+            cursor: pointer;
+            border-radius: 1000px;
         }
     }
 }
@@ -54,28 +78,45 @@
 .board {
     width: 50%;
     height: 100vh;
-    background-image: radial-gradient(aqua, white);
+    background-image: radial-gradient($color-1, white);
     
     animation: colorBlast 2s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 .results {
     width: 25%;
-    background-color: white;
+    background-color: $color-3;
     text-align: center;
-    border: .3rem solid aqua;
-    border-left: .3rem solid #777;
+
+    &__moves {
+        display: flex;
+        justify-content: space-evenly;
+
+        &-box {
+            background-color: $color-2;
+            width: 100%;
+            border: 2px solid $color-gray-l;
+            height: 10vh;
+            &:not(:first-child) {
+                border-left: none;
+            }
+        }
+
+        &-output {
+            background-color: white;
+            height: 8vh;
+        }
+    }
 }
 
 .node {
     margin: 0;
-    box-shadow: -.2rem -.2rem .2rem rgba(0, 0, 0, .2);
     font-size: 3.5vw;
     text-align: center;
     outline: none;
-    color: #777;
-    border: 1px solid #777;
-    caret-color: white;
+    color: $color-gray;
+    border: 1px solid $color-gray;
+    transition: all .2s ease-out;
 
     animation: spinBottomRight .5s cubic-bezier(0.87, 0, 0.13, 1);
 
@@ -108,12 +149,10 @@
     &:hover,
     &:focus {
         cursor: pointer;
-        box-shadow: none;
-        $color: aqua;
-        background-color: rgba($color, .9);
-        // transform: rotateY(360deg);
-        // backface-visibility: hidden;
-        // transition: all 1s ease;
+        box-shadow: .1rem .1rem .1rem rgba(0, 0, 0, .2);
+        color: white;
+        background-color: rgba($color-1, .9);
+        transform: scale(.98);
     }
 
     &:focus {
@@ -125,25 +164,23 @@
 .btn {
     display: block;
     text-decoration: none;
-    background-color: white;
-    color: black;
     box-shadow: .5rem .5rem .5rem rgba(0, 0, 0, .2);
     width: 100%;
     line-height: 1.5;
-    border: 1px solid #777;
 
     &-active {
         background-position: 100%;
-        border: 1px solid black;
-        color: black;
+        color: white;
+        border: 3px solid $color-gray-l;
+        font-size: 1.8rem;
     }
 
     &:hover {
-        box-shadow: .8rem .8rem .8rem rgba(0, 0, 0, .2);
+        box-shadow: .4rem .4rem .4rem rgba(0, 0, 0, .2);
     }
 
     &:active {
-        box-shadow: -.2rem -.2rem .2rem rgba(0, 0, 0, .2);
-        padding: 3px;
+        box-shadow: .2rem .2rem .2rem rgba(0, 0, 0, .2);
+        padding: 4px;
     }
 }

@@ -80,26 +80,44 @@ body {
   display: flex;
   width: 100%; }
 
+.divider {
+  margin: 20px 0;
+  background-color: white;
+  border: none;
+  height: 3px; }
+
 .info {
   width: 25%;
-  background-color: white;
-  text-align: center;
-  border: .3rem solid aqua;
-  border-right: .3rem solid #777; }
+  background-color: #52cccc;
+  text-align: center; }
   .info__title {
     font-size: 6vw;
     font-weight: 100;
-    line-height: 1.5;
-    background-color: white; }
-  .info__new {
-    font-size: 3.5vw;
-    line-height: 1.5;
-    border: none;
+    line-height: 1;
+    border-radius: 5px;
+    color: white;
+    background-color: #2ee6e6;
+    width: 95%;
+    height: 12vh;
+    margin: 20px auto;
+    border: 3px solid #e0dada; }
+  .info__start {
+    font-size: 2.5vw;
     padding: 5px;
-    background-color: white; }
+    width: 80% !important;
+    margin: 10px auto;
+    background-color: #2ee6e6;
+    color: white;
+    border: 3px solid #e0dada;
+    border-radius: 100px;
+    transition: all .2s ease-out; }
   .info__difficulty {
     display: flex;
-    width: 100%; }
+    width: 95%;
+    margin: 0 auto;
+    border-top: none;
+    border-left: none;
+    border-right: none; }
     .info__difficulty-btn {
       border: none;
       display: inline-block;
@@ -108,34 +126,49 @@ body {
       font-size: 1.6rem;
       text-decoration: none;
       color: black;
-      width: 33.3333%;
-      background-color: #F8F0E3;
-      background-image: linear-gradient(90deg, transparent 0%, transparent 50%, aqua 50%);
+      width: 30%;
+      margin: 0 calc(10% / 6);
+      background-color: white;
+      background-image: linear-gradient(90deg, transparent 0%, transparent 50%, #2ee6e6 50%);
       background-size: 250%;
-      transition: all .4s ease-in; }
+      transition-property: background, color;
+      transition-duration: .3s;
+      transition-timing-function: ease-in;
+      cursor: pointer;
+      border-radius: 1000px; }
 
 .board {
   width: 50%;
   height: 100vh;
-  background-image: radial-gradient(aqua, white);
+  background-image: radial-gradient(#00ffff, white);
   animation: colorBlast 2s cubic-bezier(0.87, 0, 0.13, 1); }
 
 .results {
   width: 25%;
-  background-color: white;
-  text-align: center;
-  border: .3rem solid aqua;
-  border-left: .3rem solid #777; }
+  background-color: #52cccc;
+  text-align: center; }
+  .results__moves {
+    display: flex;
+    justify-content: space-evenly; }
+    .results__moves-box {
+      background-color: #2ee6e6;
+      width: 100%;
+      border: 2px solid #e0dada;
+      height: 10vh; }
+      .results__moves-box:not(:first-child) {
+        border-left: none; }
+    .results__moves-output {
+      background-color: white;
+      height: 8vh; }
 
 .node {
   margin: 0;
-  box-shadow: -0.2rem -0.2rem 0.2rem rgba(0, 0, 0, 0.2);
   font-size: 3.5vw;
   text-align: center;
   outline: none;
-  color: #777;
-  border: 1px solid #777;
-  caret-color: white;
+  color: #bdacac;
+  border: 1px solid #bdacac;
+  transition: all .2s ease-out;
   animation: spinBottomRight 0.5s cubic-bezier(0.87, 0, 0.13, 1); }
   .node__correct {
     background-color: #75ec75 !important;
@@ -153,8 +186,10 @@ body {
     height: calc(100vh/9); }
   .node:hover, .node:focus {
     cursor: pointer;
-    box-shadow: none;
-    background-color: rgba(0, 255, 255, 0.9); }
+    box-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.2);
+    color: white;
+    background-color: rgba(0, 255, 255, 0.9);
+    transform: scale(0.98); }
   .node:focus {
     caret-color: transparent;
     color: white; }
@@ -162,18 +197,16 @@ body {
 .btn {
   display: block;
   text-decoration: none;
-  background-color: white;
-  color: black;
   box-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
   width: 100%;
-  line-height: 1.5;
-  border: 1px solid #777; }
+  line-height: 1.5; }
   .btn-active {
     background-position: 100%;
-    border: 1px solid black;
-    color: black; }
+    color: white;
+    border: 3px solid #e0dada;
+    font-size: 1.8rem; }
   .btn:hover {
-    box-shadow: 0.8rem 0.8rem 0.8rem rgba(0, 0, 0, 0.2); }
+    box-shadow: 0.4rem 0.4rem 0.4rem rgba(0, 0, 0, 0.2); }
   .btn:active {
-    box-shadow: -0.2rem -0.2rem 0.2rem rgba(0, 0, 0, 0.2);
-    padding: 3px; }
+    box-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.2);
+    padding: 4px; }

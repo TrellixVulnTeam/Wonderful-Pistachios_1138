@@ -10,22 +10,57 @@
     <div class="container">
         <div class="info">
             <h1 class="info__title">Sudoku</h1>
-            <div class="info__difficulty">
-                <button href="#" class="info__difficulty-btn btn-active">Easy</button>
-                <button href="#" class="info__difficulty-btn">Medium</button>
-                <button href="#" class="info__difficulty-btn">Hard</button>
-            </div>
-            <div class="info__difficulty">
-                <button href="#" class="info__difficulty-btn">Very Hard</button>
-                <button href="#" class="info__difficulty-btn">Insane</button>
-                <button href="#" class="info__difficulty-btn">Inhuman</button>
-            </div>
-            <button onclick="generateBoard()"  class="btn info__new">New Game</button>
+                    <hr class="divider">
+                    <div class="info__difficulty">
+                        <button href="#" class="info__difficulty-btn btn-active">Easy</button>
+                        <button href="#" class="info__difficulty-btn">Medium</button>
+                        <button href="#" class="info__difficulty-btn">Hard</button>
+                    </div>
+                    <br>
+                    <div class="info__difficulty">
+                        <button href="#" class="info__difficulty-btn">Very Hard</button>
+                        <button href="#" class="info__difficulty-btn">Insane</button>
+                        <button href="#" class="info__difficulty-btn">Inhuman</button>
+                    </div>
+                    <hr class="divider">
+            <button onclick="generateBoard()"  class="btn info__start">Start</button>
         </div>
         <div class="board">
     
         </div>
         <div class="results">
+            <div class="results__moves">
+                <div class="results__moves-box">
+                    <div class="results__moves-output">
+                        <span class="results__moves-output">
+                            0
+                        </span>
+                    </div>
+                    <span class="results__moves-label">
+                        Total Moves
+                    </span>
+                </div>
+                <div class="results__moves-box">
+                    <div class="results__moves-output">
+                        <span class="results__moves-output">
+                            0
+                        </span>
+                    </div>
+                    <span class="results__moves-label">
+                        Correct Moves
+                    </span>
+                </div>
+                <div class="results__moves-box">
+                    <div class="results__moves-output">
+                        <span class="results__moves-output">
+                            0
+                        </span>
+                    </div>
+                    <span class="results__moves-label">
+                        Wrong Moves
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
     <script src="sudoku.js"></script>
