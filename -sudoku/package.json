@@ -12,6 +12,8 @@
     "node-sass": "^6.0.1"
   },
   "dependencies": {
+    "babel": "^6.23.0",
+    "jquery": "^3.6.0",
     "live-server": "^1.2.1"
   }
 }

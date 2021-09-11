@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -24,25 +25,25 @@
                     </div>
                     <hr class="divider">
             <button onclick="generateBoard()"  class="btn info__start">Start</button>
+            <hr class="divider">
+            <div class="info__instruction">
+
+            </div>
         </div>
         <div class="board">
     
         </div>
         <div class="results">
+            <div class="results__timer">
+                <div class="results__timer-container">
+                    <span id="mins">00</span><span style="transform: translateY(-12px);">:</span><span id="seconds">00</span>
+                </div>
+            </div>
+            <hr class="divider">
             <div class="results__moves">
                 <div class="results__moves-box">
-                    <div class="results__moves-output">
-                        <span class="results__moves-output">
-                            0
-                        </span>
-                    </div>
-                    <span class="results__moves-label">
-                        Total Moves
-                    </span>
-                </div>
-                <div class="results__moves-box">
-                    <div class="results__moves-output">
-                        <span class="results__moves-output">
+                    <div class="results__moves-output-1">
+                        <span class="results__moves-output-label">
                             0
                         </span>
                     </div>
@@ -51,8 +52,8 @@
                     </span>
                 </div>
                 <div class="results__moves-box">
-                    <div class="results__moves-output">
-                        <span class="results__moves-output">
+                    <div class="results__moves-output-2">
+                        <span class="results__moves-output-label">
                             0
                         </span>
                     </div>
@@ -61,6 +62,24 @@
                     </span>
                 </div>
             </div>
+            <hr class="divider">
+            <div class="results__grade">
+                <div class="results__grade-overlay"></div>
+                <div class="results__grade-percent">
+                    100%
+                </div>
+                <div class="results__grade-letter">
+                    A
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="win">
+        <div class="win__overlay">
+
+        </div>
+        <div class="win__close">
+            <button class="win__close-btn" onclick="closeOverlay()">&#x2715</button>
         </div>
     </div>
     <script src="sudoku.js"></script>

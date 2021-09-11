@@ -1,6 +1,33 @@
-console.log(document.sudoku.generate('easy'));
 let board;
 let solvedBoard;
+let totalMoves = 0;
+let correctMoves = 0;
+let moves = [0,0];
+let gameWon = false;
+
+let mins = 0;
+let seconds = 0;
+
+function startTimer(){
+  timex = setTimeout(function(){
+    seconds++;
+    if (seconds > 59) {
+        seconds=0;mins++;
+    }   
+    if (mins< 10) {                     
+      $("#mins").text('0'+mins);
+    } else {
+        $("#mins").text(mins+':');
+    }
+    if (seconds < 10) {
+      $("#seconds").text('0'+seconds);
+    } else {
+      $("#seconds").text(seconds);
+    }
+    getScore();
+    startTimer();
+  }, 1000);
+}
 
 const difficultyChoice = document.querySelectorAll('.info__difficulty-btn');
 for (let x = 0; x < difficultyChoice.length; x++) {
@@ -12,10 +39,24 @@ for (let x = 0; x < difficultyChoice.length; x++) {
     });
 }
 
+$('.results__grade').on('click', function(){openOverlay();});
+
 const generateBoard = () => {
+    // Reset possible problem variables
+    if ($('.node__incorrect')) {
+        $('.node__incorrect').removeClass('node__incorrect');
+    }
+    moves = moves.map(x => 0);
+    updateMoves();
+    mins =0;
+    seconds =0;
+    $('#mins').html('00');
+    $('#seconds').html('00');
+
     let difficulty = document.querySelectorAll('.btn-active');
     board = document.sudoku.generate(difficulty[0].innerHTML.toLowerCase());
     solvedBoard = document.sudoku.solve(board);
+    startTimer();
     displayValuesBoard();
 }
 
@@ -51,14 +92,35 @@ const validateBoard = (obj) => {
     }
     getCurrentBoard();
     let nodeNum = parseInt(obj.classList[4].substring(1));
-    console.log('Object: ' + obj.value);
-    console.log('Correct Value: ' + solvedBoard.substring(nodeNum, nodeNum+1));
     if (parseInt(obj.value) == solvedBoard.substring(nodeNum, nodeNum+1)) {
         nodeFeedbackAnimation(obj.classList[1]); //Col
         nodeFeedbackAnimation(obj.classList[2]); //Row
         nodeFeedbackAnimation(obj.classList[3]); //Square
+        moves[0]++;
     } else {
         obj.classList.add('node__incorrect');
+        moves[1]++;
+    }
+    updateMoves();
+    if (checkWin()) {
+        clearTimeout(timex);
+        alert('Win');
+    }
+}
+
+const checkWin = () => {
+    for (let x = 0; x < 81; x++) {
+        if (board[x] != solvedBoard[x]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+const updateMoves = () => {
+    let moveSpans = document.querySelectorAll('.results__moves-output-label');
+    for (let i = 0; i < 2; i++) {
+        moveSpans[i].innerHTML = moves[i];
     }
 }
 
@@ -142,6 +204,35 @@ const generateBoardHTML = () => {
     }
 }
 
+const getScore = () => {
+    let totalSeconds = mins*60 + seconds;
+    let percentDiv = document.querySelector('.results__grade-percent');
+    let gradeDiv = document.querySelector('.results__grade-letter');
+    let percent = 100 - parseInt(totalSeconds/10) - moves[1];
+    percentDiv.innerHTML = `${percent}%`;
+    if (percent >= 90) {
+        gradeDiv.innerHTML = 'A';
+    } else if (percent >= 80) {
+        gradeDiv.innerHTML = 'B';
+    } else if (percent >= 70) {
+        gradeDiv.innerHTML = 'C';
+    } else if (percent >= 60) {
+        gradeDiv.innerHTML = 'D';
+    } else {
+        gradeDiv.innerHTML = 'F';
+    }
+}
 
+const openOverlay = () => {
+    $('.win').css('display', 'block');
+    clearTimeout(timex);
+}
+
+const closeOverlay = () => {
+    $('.win').css('display', 'none');
+    if (gameWon == false) {
+        startTimer();
+    }
+}
 
 generateBoardHTML();
