@@ -58,6 +58,7 @@ const generateBoard = () => {
     solvedBoard = document.sudoku.solve(board);
     startTimer();
     displayValuesBoard();
+    animateNodes();
 }
 
 const displayValuesBoard = () => {
@@ -153,6 +154,26 @@ const nodeFeedbackAnimation = (objClass) => {
             setTimeout(function () {columnNodes[x].classList.remove('node__correct')}, 500);
         }
     }
+}
+
+const animateNodes = () => {
+    let nodes = document.querySelectorAll('.node');
+    let index = 0;
+    for (let i =0; i < 81; i++) {
+        nodes[i].style.display = 'none';
+    }
+    const animateNode = () => {
+        setTimeout(function() {
+            console.log(nodes[index]);
+            nodes[index].style.display = 'inline-block';
+            nodes[index].style.animation = 'spinBottomRight .04s ease-in-out';
+            index++;
+            if (index < 81) {
+                animateNode();
+            }
+        }, 20);
+    }
+    animateNode();
 }
 
 const generateBoardHTML = () => {

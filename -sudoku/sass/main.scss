@@ -92,8 +92,9 @@
     width: 50%;
     height: 100vh;
     background-image: radial-gradient($color-1, white);
+    z-index: 2000;
     
-    // animation: colorBlast 2s cubic-bezier(0.87, 0, 0.13, 1);
+    animation: colorBlast 1.5s ease-out;
 }
 
 .results {

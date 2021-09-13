@@ -61,13 +61,12 @@ body {
 @keyframes spinBottomRight {
   0% {
     border: none;
-    opacity: .4;
-    transform: scale(0.4); }
+    opacity: 0;
+    transform: scale(0.1); }
   100% {
     opacity: 1;
     transform: scale(1);
-    border-bottom: 1px solid black;
-    border-right: 1px solid black; } }
+    border: none; } }
 
 @keyframes colorBlast {
   0% {
@@ -150,7 +149,9 @@ body {
 .board {
   width: 50%;
   height: 100vh;
-  background-image: radial-gradient(#00ffff, white); }
+  background-image: radial-gradient(#00ffff, white);
+  z-index: 2000;
+  animation: colorBlast 1.5s ease-out; }
 
 .results {
   width: 25%;
