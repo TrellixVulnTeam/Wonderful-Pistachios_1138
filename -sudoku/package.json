@@ -13,7 +13,9 @@
   },
   "dependencies": {
     "babel": "^6.23.0",
+    "common-js": "^0.3.8",
     "jquery": "^3.6.0",
-    "live-server": "^1.2.1"
+    "live-server": "^1.2.1",
+    "progressbar.js": "^1.1.0"
   }
 }

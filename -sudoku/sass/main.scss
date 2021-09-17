@@ -295,7 +295,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 3000;
     display: none;
 
     &__overlay {
@@ -306,6 +306,23 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        border-radius: 15px;
+        text-align: center;
+        overflow: hidden;
+        background-color: $color-3;
+        border: 5px solid white;
+        &-heading {
+            width: 100%;
+            font-size: 6rem;
+            background-color: $color-2;
+            color: white;
+            border-bottom: 5px solid white;
+        }
+        &-animation {
+            width: 50%;
+            height: 100%;
+            border-right: 5px solid white;
+        }
     }
 
     &__close {

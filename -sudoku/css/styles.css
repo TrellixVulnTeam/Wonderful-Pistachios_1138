@@ -297,7 +297,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 3000;
   display: none; }
   .win__overlay {
     background-color: white;
@@ -306,7 +306,22 @@ body {
     height: 80vh;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); }
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    text-align: center;
+    overflow: hidden;
+    background-color: #52cccc;
+    border: 5px solid white; }
+    .win__overlay-heading {
+      width: 100%;
+      font-size: 6rem;
+      background-color: #2ee6e6;
+      color: white;
+      border-bottom: 5px solid white; }
+    .win__overlay-animation {
+      width: 50%;
+      height: 100%;
+      border-right: 5px solid white; }
   .win__close {
     position: absolute;
     top: 15px;

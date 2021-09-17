@@ -7,6 +7,8 @@ let gameWon = false;
 
 let mins = 0;
 let seconds = 0;
+var ProgressBar = require('progressbar.js')
+var line = new ProgressBar.Line('#container');
 
 function startTimer(){
   timex = setTimeout(function(){
