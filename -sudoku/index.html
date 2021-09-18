@@ -10,24 +10,30 @@
 <body>
     <div class="container">
         <div class="info">
-            <h1 class="info__title">Sudoku</h1>
-                    <hr class="divider">
-                    <div class="info__difficulty">
+            <div class="info__title">
+                <h1 class="info__title-text">Sudoku</h1>
+            </div>
+            <div class="info__difficulty">
+                <div class="info__difficulty-container">
+                    <div class="info__difficulty-row">
                         <button href="#" class="info__difficulty-btn btn-active">Easy</button>
                         <button href="#" class="info__difficulty-btn">Medium</button>
                         <button href="#" class="info__difficulty-btn">Hard</button>
                     </div>
-                    <br>
-                    <div class="info__difficulty">
+                    <div class="info__difficulty-row">
                         <button href="#" class="info__difficulty-btn">Very Hard</button>
                         <button href="#" class="info__difficulty-btn">Insane</button>
                         <button href="#" class="info__difficulty-btn">Inhuman</button>
                     </div>
-                    <hr class="divider">
-            <button onclick="generateBoard()"  class="btn info__start">Start</button>
-            <hr class="divider">
+                </div>
+            </div>
+            <div class="info__start">
+                <button onclick="generateBoard()"  class="info__start-btn">Start</button>
+            </div>
             <div class="info__instruction">
+                <div class="info__instruction-box">
 
+                </div>
             </div>
         </div>
         <div class="board">
@@ -36,40 +42,44 @@
         <div class="results">
             <div class="results__timer">
                 <div class="results__timer-container">
-                    <span id="mins">00</span><span style="transform: translateY(-12px);">:</span><span id="seconds">00</span>
+                    <div class="results__timer-text">
+                        <span id="mins">00</span><span style="transform: translateY(-12px);">:</span><span id="seconds">00</span>
+                    </div>
                 </div>
             </div>
-            <hr class="divider">
             <div class="results__moves">
-                <div class="results__moves-box">
-                    <div class="results__moves-output-1">
-                        <span class="results__moves-output-label">
-                            0
+                <div class="results__moves-container">
+                    <div class="results__moves-box">
+                        <div class="results__moves-output-1">
+                            <span class="results__moves-output-label">
+                                0
+                            </span>
+                        </div>
+                        <span class="results__moves-label">
+                            Correct Moves
                         </span>
                     </div>
-                    <span class="results__moves-label">
-                        Correct Moves
-                    </span>
-                </div>
-                <div class="results__moves-box">
-                    <div class="results__moves-output-2">
-                        <span class="results__moves-output-label">
-                            0
+                    <div class="results__moves-box">
+                        <div class="results__moves-output-2">
+                            <span class="results__moves-output-label">
+                                0
+                            </span>
+                        </div>
+                        <span class="results__moves-label">
+                            Wrong Moves
                         </span>
                     </div>
-                    <span class="results__moves-label">
-                        Wrong Moves
-                    </span>
                 </div>
             </div>
-            <hr class="divider">
             <div class="results__grade">
-                <div class="results__grade-overlay"></div>
-                <div class="results__grade-percent">
-                    100%
-                </div>
-                <div class="results__grade-letter">
-                    A
+                <div class="results__grade-container">
+                    <div class="results__grade-percent">
+                        100%
+                    </div>
+                    <div class="results__grade-letter">
+                        A
+                    </div>
+                    <div class="results__grade-overlay"></div>
                 </div>
             </div>
         </div>

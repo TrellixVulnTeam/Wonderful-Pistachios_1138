@@ -7,8 +7,16 @@ let gameWon = false;
 
 let mins = 0;
 let seconds = 0;
-var ProgressBar = require('progressbar.js')
-var line = new ProgressBar.Line('#container');
+let timex;
+// var ProgressBar = require('progressbar.js')
+// var line = new ProgressBar.Line('#container');
+
+const resize = () => {
+    let scale = (window.innerWidth/1920);
+    console.log(scale);
+    $('.container').css('transform', `scale(${scale})`);
+}
+// window.addEventListener('resize', resize);
 
 function startTimer(){
   timex = setTimeout(function(){
@@ -19,7 +27,7 @@ function startTimer(){
     if (mins< 10) {                     
       $("#mins").text('0'+mins);
     } else {
-        $("#mins").text(mins+':');
+        $("#mins").text(mins);
     }
     if (seconds < 10) {
       $("#seconds").text('0'+seconds);
@@ -41,7 +49,7 @@ for (let x = 0; x < difficultyChoice.length; x++) {
     });
 }
 
-$('.results__grade').on('click', function(){openOverlay();});
+$('.results__grade-overlay').on('click', function(){openOverlay();});
 
 const generateBoard = () => {
     // Reset possible problem variables
@@ -54,6 +62,9 @@ const generateBoard = () => {
     seconds =0;
     $('#mins').html('00');
     $('#seconds').html('00');
+    if (timex) {
+        clearTimeout(timex);
+    }
 
     let difficulty = document.querySelectorAll('.btn-active');
     board = document.sudoku.generate(difficulty[0].innerHTML.toLowerCase());
@@ -153,6 +164,12 @@ const nodeFeedbackAnimation = (objClass) => {
     if (completeSet) {
         for (let x = 0; x < 9; x++) {
             columnNodes[x].classList.add('node__correct');
+            columnNodes[x].style.animation = 'none';
+            window.requestAnimationFrame(function(time) {
+                window.requestAnimationFrame(function(time) {
+                    columnNodes[x].style.animation = 'spin .8s ease-out';
+                });
+            });
             setTimeout(function () {columnNodes[x].classList.remove('node__correct')}, 500);
         }
     }
@@ -166,7 +183,6 @@ const animateNodes = () => {
     }
     const animateNode = () => {
         setTimeout(function() {
-            console.log(nodes[index]);
             nodes[index].style.display = 'inline-block';
             nodes[index].style.animation = 'spinBottomRight .04s ease-in-out';
             index++;
