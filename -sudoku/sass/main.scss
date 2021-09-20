@@ -31,9 +31,10 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 7vw;
-            font-weight: 100;
-            line-height: 1;
+            font-size: 6.5vw;
+            font-weight: 400;
+            font-family: 'Playfair Display';
+            line-height: 1.2;
             border-radius: 5px;
             color: white;
             background-color: #2ee6e6;
@@ -103,7 +104,10 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 5vw;
+            font-size: 4vw;
+            font-weight: 600;
+            font-family: 'Playfair Display';
+            letter-spacing: 1rem;
             line-height: 1;
             padding: 5px;
             height: 80%;
@@ -112,10 +116,10 @@
             color: white;
             border: 3px solid $color-gray-l;
             border-radius: 100px;
-            transition: all .3s ease-out;
             box-shadow: .2rem .8rem .5rem rgba(0, 0, 0, 0.2);
             &:active {
                 box-shadow: .1rem .4rem .5rem rgba(0, 0, 0, 0.2);
+                height: 79%;
             }
         }
     }
@@ -143,7 +147,7 @@
 .board {
     width: 50%;
     height: 100%;
-    background-image: radial-gradient($color-1, white);
+    background-color: $color-1;
     z-index: 2000;
     
     // animation: colorBlast 1.5s ease-out;
@@ -185,6 +189,7 @@
         & span {
             display: block;
             float: left;
+            position: relative;
         }
     }
 
@@ -219,19 +224,21 @@
             background-color: rgba($color-green, .8);
             height: 70%;
             border-bottom: 2px solid $color-gray-l;
+            overflow: hidden;
         }
 
         &-output-2 {
             background-color: rgba($color-red, .8);
             height: 70%;
             border-bottom: 2px solid $color-gray-l;
+            overflow: hidden;
         }
 
         &-output-label {
-            height: 30%;
             font-size: 8vw;
-            line-height: .85;
+            line-height: 1;
             color: white;
+            display: block;
         }
 
         &-label {
@@ -271,7 +278,7 @@
         }
         &-letter {
             font-size: 18vw;
-            line-height: .9;
+            line-height: 1;
             height: 67%;
             width: 100%;
             background-color: $color-2;

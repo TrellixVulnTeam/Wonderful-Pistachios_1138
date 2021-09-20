@@ -56,13 +56,11 @@
 @keyframes fadeInDrop {
     0% {
         opacity: 0;
-    }
-    50% {
-        transform: translateY(-.5rem);
+        transform: translateY(-12rem);
     }
     100% {
         opacity: 1;
-        transform: translate(0);
+        transform: translateY(0px);
     }
 }
 
@@ -85,5 +83,17 @@
     }
     100% {
         transform: scale(1);
+    }
+}
+
+@keyframes timerSlideBottom {
+    100% {
+        top: 0;
+    }
+}
+
+@keyframes timerSlideTop {
+    100% {
+        transform: translateY(-100%);
     }
 }

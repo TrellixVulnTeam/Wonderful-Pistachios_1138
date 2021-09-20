@@ -2,7 +2,7 @@ let board;
 let solvedBoard;
 let totalMoves = 0;
 let correctMoves = 0;
-let moves = [0,0];
+let moves = [0,0,0];
 let gameWon = false;
 
 let mins = 0;
@@ -21,22 +21,59 @@ const resize = () => {
 function startTimer(){
   timex = setTimeout(function(){
     seconds++;
-    if (seconds > 59) {
-        seconds=0;mins++;
-    }   
-    if (mins< 10) {                     
-      $("#mins").text('0'+mins);
-    } else {
-        $("#mins").text(mins);
-    }
-    if (seconds < 10) {
-      $("#seconds").text('0'+seconds);
-    } else {
-      $("#seconds").text(seconds);
-    }
+    setTimeout(function() {
+        if (seconds > 59) {
+            seconds=0;mins++;
+        }   
+        if (mins< 10) {                     
+          $("#mins").text('0'+mins);
+        } else {
+            $("#mins").text(mins);
+        }
+        if (seconds < 10) {
+          $("#seconds").text('0'+seconds);
+        } else {
+          $("#seconds").text(seconds);
+        }
+    }, 1000)
     getScore();
+    animateTimer();
     startTimer();
   }, 1000);
+}
+
+function animateTimer() {
+    let minSpan = document.querySelector('#mins');
+    let secondSpan = document.querySelector('#seconds');
+    let afterTags = document.createElement('style');
+    afterTags.innerHTML = `
+    #mins::after {
+        content: '${mins < 10 ? '0' + mins : mins}';
+        display: block;
+        z-index: 4000;
+        position: absolute;
+        top: 100%;
+        left: 0;
+    }
+    #seconds::after {
+        content: '${seconds < 10 ? '0' + seconds : seconds}';
+        display: block;
+        z-index: 4000;
+        position: absolute;
+        top: 100%;
+        left: 0;
+    }
+    `;
+    document.head.appendChild(afterTags);
+    minSpan.style.animation = 'none';
+    secondSpan.style.animation = 'none';
+    window.requestAnimationFrame(function(time) {
+        window.requestAnimationFrame(function(time) {
+            minSpan.style.animation = 'timerSlideTop 1s ease-in-out';
+            secondSpan.style.animation = 'timerSlideTop 1s ease-in-out';
+        });
+    });
+    setTimeout(function() {afterTags.remove()}, 1000);
 }
 
 const difficultyChoice = document.querySelectorAll('.info__difficulty-btn');
@@ -111,9 +148,11 @@ const validateBoard = (obj) => {
         nodeFeedbackAnimation(obj.classList[2]); //Row
         nodeFeedbackAnimation(obj.classList[3]); //Square
         moves[0]++;
+        moves[2] = 0;
     } else {
         obj.classList.add('node__incorrect');
         moves[1]++;
+        moves[2] = 1;
     }
     updateMoves();
     if (checkWin()) {
@@ -134,7 +173,19 @@ const checkWin = () => {
 const updateMoves = () => {
     let moveSpans = document.querySelectorAll('.results__moves-output-label');
     for (let i = 0; i < 2; i++) {
-        moveSpans[i].innerHTML = moves[i];
+        moveSpans[i].style.animation = 'none';
+        window.requestAnimationFrame(function(time) {
+            window.requestAnimationFrame(function(time) {
+                if (moves[2] == 0 && moves[0] != 0) {
+                    moveSpans[0].style.animation = 'fadeInDrop .1s ease-out';
+                } else if (moves[2] == 1 && moves[1] != 0) {
+                    moveSpans[1].style.animation = 'fadeInDrop .1s ease-out';
+                }   
+            });
+        });
+        setTimeout(function() {
+            moveSpans[i].innerHTML = moves[i];
+        }, 100)
     }
 }
 
@@ -170,7 +221,7 @@ const nodeFeedbackAnimation = (objClass) => {
                     columnNodes[x].style.animation = 'spin .8s ease-out';
                 });
             });
-            setTimeout(function () {columnNodes[x].classList.remove('node__correct')}, 500);
+            setTimeout(function () {columnNodes[x].classList.remove('node__correct')}, 800);
         }
     }
 }
@@ -189,7 +240,7 @@ const animateNodes = () => {
             if (index < 81) {
                 animateNode();
             }
-        }, 20);
+        }, 10);
     }
     animateNode();
 }
