@@ -4,77 +4,12 @@ let totalMoves = 0;
 let correctMoves = 0;
 let moves = [0,0,0];
 let gameWon = false;
+let percent = 100;
 
-let mins = 0;
-let seconds = 0;
+let mins;
+let seconds;
 let timex;
-// var ProgressBar = require('progressbar.js')
-// var line = new ProgressBar.Line('#container');
-
-const resize = () => {
-    let scale = (window.innerWidth/1920);
-    console.log(scale);
-    $('.container').css('transform', `scale(${scale})`);
-}
-// window.addEventListener('resize', resize);
-
-function startTimer(){
-  timex = setTimeout(function(){
-    seconds++;
-    setTimeout(function() {
-        if (seconds > 59) {
-            seconds=0;mins++;
-        }   
-        if (mins< 10) {                     
-          $("#mins").text('0'+mins);
-        } else {
-            $("#mins").text(mins);
-        }
-        if (seconds < 10) {
-          $("#seconds").text('0'+seconds);
-        } else {
-          $("#seconds").text(seconds);
-        }
-    }, 1000)
-    getScore();
-    animateTimer();
-    startTimer();
-  }, 1000);
-}
-
-function animateTimer() {
-    let minSpan = document.querySelector('#mins');
-    let secondSpan = document.querySelector('#seconds');
-    let afterTags = document.createElement('style');
-    afterTags.innerHTML = `
-    #mins::after {
-        content: '${mins < 10 ? '0' + mins : mins}';
-        display: block;
-        z-index: 4000;
-        position: absolute;
-        top: 100%;
-        left: 0;
-    }
-    #seconds::after {
-        content: '${seconds < 10 ? '0' + seconds : seconds}';
-        display: block;
-        z-index: 4000;
-        position: absolute;
-        top: 100%;
-        left: 0;
-    }
-    `;
-    document.head.appendChild(afterTags);
-    minSpan.style.animation = 'none';
-    secondSpan.style.animation = 'none';
-    window.requestAnimationFrame(function(time) {
-        window.requestAnimationFrame(function(time) {
-            minSpan.style.animation = 'timerSlideTop 1s ease-in-out';
-            secondSpan.style.animation = 'timerSlideTop 1s ease-in-out';
-        });
-    });
-    setTimeout(function() {afterTags.remove()}, 1000);
-}
+let timerFlags = [0,0,0];
 
 const difficultyChoice = document.querySelectorAll('.info__difficulty-btn');
 for (let x = 0; x < difficultyChoice.length; x++) {
@@ -85,8 +20,140 @@ for (let x = 0; x < difficultyChoice.length; x++) {
         difficultyChoice[x].classList.add('btn-active');
     });
 }
-
 $('.results__grade-overlay').on('click', function(){openOverlay();});
+
+// const resize = () => {
+//     let scale = (window.innerWidth/1920);
+//     console.log(scale);
+//     $('.container').css('transform', `scale(${scale})`);
+// }
+// window.addEventListener('resize', resize);
+
+const animateOverlay = () => {
+    var bar = new ProgressBar.Circle('#progressContainer', {
+        color: '#aaa',
+        // This has to be the same size as the maximum width to
+        // prevent clipping
+        strokeWidth: 4,
+        trailWidth: 1,
+        easing: 'easeInOut',
+        duration: 1400,
+        text: {
+          autoStyleContainer: false
+        },
+        from: {color: '#FD5A5A', width: 4},
+        to: {color: '#75EC75', width: 4},
+        // Set default step function for all animate calls
+        step: function(state, circle) {
+          circle.path.setAttribute('stroke', state.color);
+          circle.path.setAttribute('stroke-width', state.width);
+      
+          var value = Math.round(circle.value() * 100);
+          if (value === 0) {
+            circle.setText('');
+          } else {
+            circle.setText(value);
+          }
+      
+        }
+      });
+    bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+    bar.text.style.fontSize = '2rem';
+    var percentage = parseFloat(percent/100);
+    bar.animate(percentage);
+}
+
+function startTimer(){
+    timex = setTimeout(function(){
+        seconds++;
+        setTimeout(function() {
+            if (seconds > 59) {
+                seconds=0;mins++;
+            } 
+            if (mins < 10) {                     
+                $("#mins-ten").text('0');
+                $("#mins-one").text(mins % 10);
+            } else {
+                $("#mins-ten").text(parseInt(mins/10));
+                $("#mins-one").text(mins % 10);
+            }
+            if (seconds < 10) {
+                $("#seconds-ten").text('0');
+                $("#seconds-one").text(seconds % 10);
+            } else {
+                $("#seconds-ten").text(parseInt(seconds/10));
+                $("#seconds-one").text(seconds % 10);
+            }
+        }, 1000)
+        if ((mins % 10) == 9 && seconds == 60) {
+            timerFlags[0] = true;
+        }
+        if (seconds > 59) {
+            timerFlags[1] = true;
+            seconds=0;mins++;
+        }  
+        if (seconds % 10 == 0) {
+            timerFlags[2] = true;
+        }
+        getScore();
+        startTimer();
+        animateTimer();
+  }, 1000);
+}
+
+function animateTimer() {
+    let minTenSpan = document.querySelector('#mins-ten');
+    let minOneSpan = document.querySelector('#mins-one');
+    let secondTenSpan = document.querySelector('#seconds-ten');
+    let secondOneSpan = document.querySelector('#seconds-one');
+    let afterTags = document.createElement('style');
+    afterTags.innerHTML = `
+    #mins-ten::after {
+        content: '${parseInt(mins/10)}';
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+    }
+    #mins-one::after {
+        content: '${mins % 10}';
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+    }
+    #seconds-ten::after {
+        content: '${parseInt(seconds/10)}';
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+    }
+    #seconds-one::after {
+        content: '${seconds % 10}';
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+    }
+    `;
+    document.head.appendChild(afterTags);
+    if (timerFlags[0]) {resetTimerAnimation(minTenSpan)}
+    if (timerFlags[1]) {resetTimerAnimation(minOneSpan)}
+    if (timerFlags[2]) {resetTimerAnimation(secondTenSpan)}
+    resetTimerAnimation(secondOneSpan);
+    setTimeout(function() {afterTags.remove()}, 1000);
+    timerFlags = [false, false, false];
+}
+
+const resetTimerAnimation = (el) => {
+    el.style.animation = 'none';
+    window.requestAnimationFrame(function(time) {
+        window.requestAnimationFrame(function(time) {
+            el.style.animation = 'timerSlideTop 1s cubic-bezier(0.87, 0, 0.13, 1)';
+        });
+    });
+}
 
 const generateBoard = () => {
     // Reset possible problem variables
@@ -95,8 +162,8 @@ const generateBoard = () => {
     }
     moves = moves.map(x => 0);
     updateMoves();
-    mins =0;
-    seconds =0;
+    mins = 0;
+    seconds = 0;
     $('#mins').html('00');
     $('#seconds').html('00');
     if (timex) {
@@ -172,19 +239,25 @@ const checkWin = () => {
 
 const updateMoves = () => {
     let moveSpans = document.querySelectorAll('.results__moves-output-label');
+    let output1 = document.querySelector('.results__moves-output-1-overlay');
+    let output2 = document.querySelector('.results__moves-output-2-overlay');
     for (let i = 0; i < 2; i++) {
         moveSpans[i].style.animation = 'none';
         window.requestAnimationFrame(function(time) {
             window.requestAnimationFrame(function(time) {
                 if (moves[2] == 0 && moves[0] != 0) {
                     moveSpans[0].style.animation = 'fadeInDrop .1s ease-out';
+                    output1.style.opacity = '0.2';
                 } else if (moves[2] == 1 && moves[1] != 0) {
                     moveSpans[1].style.animation = 'fadeInDrop .1s ease-out';
+                    output2.style.opacity = '0.2';
                 }   
             });
         });
         setTimeout(function() {
             moveSpans[i].innerHTML = moves[i];
+            output1.style.opacity = '0';
+            output2.style.opacity = '0';
         }, 100)
     }
 }
@@ -298,7 +371,7 @@ const getScore = () => {
     let totalSeconds = mins*60 + seconds;
     let percentDiv = document.querySelector('.results__grade-percent');
     let gradeDiv = document.querySelector('.results__grade-letter');
-    let percent = 100 - parseInt(totalSeconds/10) - moves[1];
+    percent = 100 - parseInt(totalSeconds/10) - moves[1];
     percentDiv.innerHTML = `${percent}%`;
     if (percent >= 90) {
         gradeDiv.innerHTML = 'A';
@@ -315,6 +388,7 @@ const getScore = () => {
 
 const openOverlay = () => {
     $('.win').css('display', 'block');
+    animateOverlay();
     clearTimeout(timex);
 }
 

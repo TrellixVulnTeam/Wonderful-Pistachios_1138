@@ -64,6 +64,15 @@
     }
 }
 
+@keyframes movesOpacity {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 @keyframes spinBottomRight {
     0% {
         border: none;
