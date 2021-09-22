@@ -22,23 +22,18 @@ for (let x = 0; x < difficultyChoice.length; x++) {
 }
 $('.results__grade-overlay').on('click', function(){openOverlay();});
 
-// const resize = () => {
-//     let scale = (window.innerWidth/1920);
-//     console.log(scale);
-//     $('.container').css('transform', `scale(${scale})`);
-// }
-// window.addEventListener('resize', resize);
-
 const animateOverlay = () => {
-    var bar = new ProgressBar.Circle('#progressContainer', {
+    document.querySelector('#progressContainer').innerHTML = '';
+    let bar = new ProgressBar.Circle('#progressContainer', {
         color: '#aaa',
         // This has to be the same size as the maximum width to
         // prevent clipping
         strokeWidth: 4,
-        trailWidth: 1,
+        trailWidth: 4,
         easing: 'easeInOut',
         duration: 1400,
         text: {
+          value: '',
           autoStyleContainer: false
         },
         from: {color: '#FD5A5A', width: 4},
@@ -52,15 +47,47 @@ const animateOverlay = () => {
           if (value === 0) {
             circle.setText('');
           } else {
-            circle.setText(value);
+            circle.setText(value + '%');
           }
-      
+          circle.text.style.color = state.color;
         }
       });
     bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
     bar.text.style.fontSize = '2rem';
-    var percentage = parseFloat(percent/100);
+    let percentage = parseFloat(percent/100);
     bar.animate(percentage);
+    setTimeout(function() {
+        let progressText = document.querySelector('.progressbar-text');
+        progressText.style.opacity = '0';
+        setTimeout(function() {
+            let color = document.querySelector('.progressbar-text').style.color;
+            let grade = document.querySelector('.results__grade-letter').innerHTML;
+            let gradeSpan = document.createElement('p');
+            gradeSpan.style.color = color;
+            gradeSpan.classList = 'progressbar-grade';
+            gradeSpan.innerHTML = grade;
+            let percentSpan = document.createElement('p');
+            percentSpan.style.color = color;
+            percentSpan.classList = 'progressbar-percent';
+            percentSpan.innerHTML = `${percentage*100}%`;
+            progressText.innerText = '';
+            progressText.appendChild(percentSpan);
+            progressText.appendChild(gradeSpan);
+            progressText.style.opacity = '1';
+            setTimeout(animateResultsList, 500);
+        }, 500)
+    }, 1400)
+}
+
+const animateResultsList = () => {
+    resultItems = document.querySelectorAll('.win__overlay-results-item');
+    delay = 0;
+    for (let i = resultItems.length; i >= 0; i--) {
+        delay += 200;
+        setTimeout(function() {
+            resultItems[i].style.transform = 'translateY(0)';
+        }, delay);
+    }
 }
 
 function startTimer(){

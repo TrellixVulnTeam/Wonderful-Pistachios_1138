@@ -104,8 +104,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 4vw;
-            font-weight: 600;
+            font-size: 3vw;
+            font-weight: 400;
             font-family: 'Playfair Display';
             letter-spacing: 1rem;
             line-height: 1;
@@ -432,6 +432,7 @@
             height: 85%;
             border-right: 5px solid white;
             position: relative;
+            float: left;
 
             & svg {
                 width: 80% !important;
@@ -441,10 +442,40 @@
                 left: 50%;
                 transform: translate(-50%,-50%);
                 border-radius: 50%;
+                border: 1rem solid white;
             }
             
             & .progressbar-text {
-                font-size: 4vw !important;
+                font-size: 7vw !important;
+                transition: opacity .5s ease-in-out;
+            }
+
+            & .progressbar-grade {
+                font-size: 20vw;
+                line-height: 1;
+            }
+
+            & .progressbar-percent {
+                line-height: 1;
+                font-size: 5vw;
+            }
+        }
+
+        &-results {
+            width: 50%;
+            height: 85%;
+            float: left;
+            &-item {
+                width: 95%;
+                border-radius: 5px;
+                background-color: $color-1;
+                text-shadow: 0px 0px 10px $color-gray-l;
+                color: white;
+                font-size: 1.6vw;
+                margin: calc((100% - (5 * 1.6vw)) / 10) auto;
+                font-weight: bold;
+                transform: translateY(-1000px);
+                transition: transform 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
             }
         }
     }

@@ -13,36 +13,6 @@ body {
   line-height: 1.7;
   overflow: hidden; }
 
-@keyframes moveInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(10rem); }
-  80% {
-    transform: translateX(-1rem);
-    transform: translateY(1rem); }
-  100% {
-    opacity: 1;
-    transform: translate(0); } }
-
-@keyframes moveInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(-10rem); }
-  80% {
-    transform: translateX(1rem);
-    transform: translateY(-1rem); }
-  100% {
-    opacity: 1;
-    transform: translate(0); } }
-
-@keyframes moveInBottom {
-  0% {
-    opacity: 0;
-    transform: translateY(10rem); }
-  100% {
-    opacity: 1;
-    transform: translate(0); } }
-
 @keyframes spin {
   0% {
     transform: rotate(0deg); }
@@ -56,12 +26,6 @@ body {
   100% {
     opacity: 1;
     transform: translateY(0px); } }
-
-@keyframes movesOpacity {
-  0% {
-    opacity: 1; }
-  100% {
-    opacity: 0; } }
 
 @keyframes spinBottomRight {
   0% {
@@ -78,10 +42,6 @@ body {
     transform: scale(5); }
   100% {
     transform: scale(1); } }
-
-@keyframes timerSlideBottom {
-  100% {
-    top: 0; } }
 
 @keyframes timerSlideTop {
   100% {
@@ -173,8 +133,8 @@ body {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 4vw;
-      font-weight: 600;
+      font-size: 3vw;
+      font-weight: 400;
       font-family: 'Playfair Display';
       letter-spacing: 1rem;
       line-height: 1;
@@ -430,7 +390,8 @@ body {
       width: 50%;
       height: 85%;
       border-right: 5px solid white;
-      position: relative; }
+      position: relative;
+      float: left; }
       .win__overlay-animation svg {
         width: 80% !important;
         background-color: white;
@@ -438,9 +399,32 @@ body {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        border-radius: 50%; }
+        border-radius: 50%;
+        border: 1rem solid white; }
       .win__overlay-animation .progressbar-text {
-        font-size: 4vw !important; }
+        font-size: 7vw !important;
+        transition: opacity .5s ease-in-out; }
+      .win__overlay-animation .progressbar-grade {
+        font-size: 20vw;
+        line-height: 1; }
+      .win__overlay-animation .progressbar-percent {
+        line-height: 1;
+        font-size: 5vw; }
+    .win__overlay-results {
+      width: 50%;
+      height: 85%;
+      float: left; }
+      .win__overlay-results-item {
+        width: 95%;
+        border-radius: 5px;
+        background-color: #00ffff;
+        text-shadow: 0px 0px 10px #e0dada;
+        color: white;
+        font-size: 1.6vw;
+        margin: calc((100% - (5 * 1.6vw)) / 10) auto;
+        font-weight: bold;
+        transform: translateY(-1000px);
+        transition: transform 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6); }
   .win__close {
     position: absolute;
     top: 15px;
