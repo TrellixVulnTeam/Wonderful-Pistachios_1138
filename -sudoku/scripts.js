@@ -66,12 +66,7 @@ const animateOverlay = () => {
             gradeSpan.style.color = color;
             gradeSpan.classList = 'progressbar-grade';
             gradeSpan.innerHTML = grade;
-            let percentSpan = document.createElement('p');
-            percentSpan.style.color = color;
-            percentSpan.classList = 'progressbar-percent';
-            percentSpan.innerHTML = `${percentage*100}%`;
             progressText.innerText = '';
-            progressText.appendChild(percentSpan);
             progressText.appendChild(gradeSpan);
             progressText.style.opacity = '1';
             setTimeout(animateResultsList, 500);
@@ -266,25 +261,19 @@ const checkWin = () => {
 
 const updateMoves = () => {
     let moveSpans = document.querySelectorAll('.results__moves-output-label');
-    let output1 = document.querySelector('.results__moves-output-1-overlay');
-    let output2 = document.querySelector('.results__moves-output-2-overlay');
     for (let i = 0; i < 2; i++) {
         moveSpans[i].style.animation = 'none';
         window.requestAnimationFrame(function(time) {
             window.requestAnimationFrame(function(time) {
                 if (moves[2] == 0 && moves[0] != 0) {
-                    moveSpans[0].style.animation = 'fadeInDrop .1s ease-out';
-                    output1.style.opacity = '0.2';
+                    moveSpans[0].style.animation = 'fadeInDrop .2s ease-in-out';
                 } else if (moves[2] == 1 && moves[1] != 0) {
-                    moveSpans[1].style.animation = 'fadeInDrop .1s ease-out';
-                    output2.style.opacity = '0.2';
+                    moveSpans[1].style.animation = 'fadeInDrop .2s ease-in-out';
                 }   
             });
         });
         setTimeout(function() {
             moveSpans[i].innerHTML = moves[i];
-            output1.style.opacity = '0';
-            output2.style.opacity = '0';
         }, 100)
     }
 }
@@ -410,6 +399,16 @@ const getScore = () => {
         gradeDiv.innerHTML = 'D';
     } else {
         gradeDiv.innerHTML = 'F';
+    }
+    let modifier = document.createElement('span');
+    modifier.classList = 'results__grade-letter-modifier';
+    gradeDiv.appendChild(modifier);
+    if (percent % 10 > 6 || percent == 100) {
+        modifier.innerHTML += '+';
+    } else if (percent % 10 > 2) {
+        // Nothing
+    } else {
+        modifier.innerHTML += '-';
     }
 }
 
