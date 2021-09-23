@@ -36,6 +36,7 @@ $('.info__instruction-box-btn').on('mousedown', function() {
             for (let i = 0; i < overlays.length; i++) {
                 overlays[i].style.display = 'none';
                 displayValuesBoard();
+                mouseMode = false;
             }
         }
     } else {
@@ -49,9 +50,11 @@ $('.info__instruction-box-btn').on('mousedown', function() {
                 mouseMove();
             }
         }
-    }
-    if (slider.classList.contains('highlights')) {
-        // alert('highlights');
+        if (slider.classList.contains('highlights')) {
+            $('.node').on('mouseover', function() {
+                highlight($(this)[0]);
+            });
+        }
     }
 });
 
@@ -349,13 +352,26 @@ const updateMoves = () => {
     }
 }
 
+const highlight = (obj) => {
+    console.log(obj);
+    let columnNodes = document.querySelectorAll(`input.${obj.classList[1]}`);
+    let rowNodes = document.querySelectorAll(`input.${obj.classList[2]}`);
+    let squareNodes = document.querySelectorAll(`input.${obj.classList[3]}`);
+    let fullSet = [columnNodes, rowNodes, squareNodes];
+    for (let x = 0; x < 3; x++) {
+        for (let y = 0; y < 9; y++) {
+            fullSet[x][y].classList.add('highlight');
+        }
+    }
+}
+
 const nodeFeedbackAnimation = (objClass) => {
-    let columnNodes = document.querySelectorAll(`input.${objClass}`);
+    let nodes = document.querySelectorAll(`input.${objClass}`);
     let curVals = [];
     for (let x = 0; x < 9; x++) {
-        if (columnNodes[x].value == '') {}
+        if (nodes[x].value == '') {}
         else {
-            curVals.push(columnNodes[x].value);
+            curVals.push(nodes[x].value);
         }
     }
 
@@ -374,14 +390,14 @@ const nodeFeedbackAnimation = (objClass) => {
 
     if (completeSet) {
         for (let x = 0; x < 9; x++) {
-            columnNodes[x].classList.add('node__correct');
-            columnNodes[x].style.animation = 'none';
+            nodes[x].classList.add('node__correct');
+            nodes[x].style.animation = 'none';
             window.requestAnimationFrame(function(time) {
                 window.requestAnimationFrame(function(time) {
-                    columnNodes[x].style.animation = 'spin .8s ease-out';
+                    nodes[x].style.animation = 'spin .8s ease-out';
                 });
             });
-            setTimeout(function () {columnNodes[x].classList.remove('node__correct')}, 800);
+            setTimeout(function () {nodes[x].classList.remove('node__correct')}, 800);
         }
     }
 }

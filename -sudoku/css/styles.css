@@ -532,3 +532,6 @@ body {
       .win__close-btn:hover {
         color: rgba(255, 255, 255, 0.5);
         cursor: pointer; }
+
+.highlight {
+  background-color: black !important; }
