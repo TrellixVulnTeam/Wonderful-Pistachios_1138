@@ -6,8 +6,8 @@ let moves = [0,0,0];
 let gameWon = false;
 let percent = 100;
 
-let mins;
-let seconds;
+let mins = 0;
+let seconds = 0;
 let timex;
 let timerFlags = [0,0,0];
 
@@ -21,6 +21,36 @@ for (let x = 0; x < difficultyChoice.length; x++) {
     });
 }
 $('.results__grade-overlay').on('click', function(){openOverlay();});
+
+$('.info__instruction-box-btn').on('mousedown', function() {
+    let slider = $(this).children();
+    slider = slider[1];
+    let overlays = document.querySelectorAll('.node-overlay');
+    if (slider.style.zIndex == 500) {
+        slider.style.transform = 'translateX(-100%)';
+        setTimeout(function() {
+            slider.style.zIndex = '-1000';
+        }, 200);
+        if (slider.classList.contains('mouse-mode')) {
+            for (let i = 0; i < overlays.length; i++) {
+                overlays[i].style.display = 'none';
+                displayValuesBoard();
+            }
+        }
+    } else {
+        slider.style.zIndex = '500';
+        slider.style.transform = 'translateX(0)';
+        if (slider.classList.contains('mouse-mode')) {
+            for (let i = 0; i < overlays.length; i++) {
+                overlays[i].style.display = 'block';
+                displayValuesBoard();
+            }
+        }
+    }
+    if (slider.classList.contains('highlights')) {
+        // alert('highlights');
+    }
+});
 
 const animateOverlay = () => {
     document.querySelector('#progressContainer').innerHTML = '';
@@ -76,6 +106,7 @@ const animateOverlay = () => {
 
 const animateResultsList = () => {
     resultItems = document.querySelectorAll('.win__overlay-results-item');
+    getResultsContent(resultItems);
     delay = 0;
     for (let i = 0; i < resultItems.length; i++) {
         delay += 500;
@@ -83,6 +114,14 @@ const animateResultsList = () => {
             resultItems[i].style.transform = 'translateY(0)';
         }, delay);
     }
+}
+
+const getResultsContent = (resultItems) => {
+    resultItems[0].innerHTML = `You solved the puzzle in ${document.querySelector('.results__timer-text').textContent.split(" ").join("")}`;
+    resultItems[1].innerHTML = `You made a move every ${seconds > 0 && moves[0] > 0 && moves[1] > 0 ? parseInt(((mins > 0 ? mins * 60 : 0) + seconds) / (moves[0] + moves[1])) : 0} seconds`;
+    resultItems[2].innerHTML = `Your moves were ${moves[0] > 0 && moves[1] > 0 ? parseInt((moves[0] / (moves[0] + moves[1])) * 100) : 0}% correct`;
+    resultItems[3].innerHTML = `You completed the puzzle on ${document.querySelector('.btn-active').innerHTML} difficulty`;
+    resultItems[4].innerHTML = `Your global ranking for this difficulty is ${parseInt(Math.random() * 1000)}`;
 }
 
 function startTimer(){
@@ -204,10 +243,15 @@ const displayValuesBoard = () => {
     let nodes = document.querySelectorAll('.node');
     for (let x = 0; x < 81; x++) {
         nodes[x].value = '';
+        nodes[x].disabled = false;
     }
     for (let x = 0; x < 81; x++) {
         if (board.substring(x, x+1) != '.') {
             nodes[x].value = board.substring(x, x+1);
+            nodes[x].disabled = true;
+            if (nodes[x].disabled) {
+                nodes[x].nextSibling.style.display = 'none';
+            }
         }
     }
 }
@@ -338,47 +382,65 @@ const generateBoardHTML = () => {
     const board = document.querySelector('.board');
     for (let x = 0; x < 9; x++) {
         for (let y = 0; y < 9; y++) {
-            let node = document.createElement('input');
-            node.setAttribute('maxlength', '1');
-            node.className += 'node ';
-            node.className += `c${y} `;
-            node.className += `r${x} `;
+            let wrapper = document.createElement('div');
+            wrapper.className = 'node-wrap ';
+
+            let input = document.createElement('input');
+            input.className = 'node ';
+            input.className += ` c${y} `;
+            wrapper.className += `c${y} `;
+            input.className += `r${x}`;
+            wrapper.className += `r${x} `;
+            input.className += `n${(x * 9) + y} `;
             if (x < 3) {
                 if (y < 3) {
-                    node.className += 's1';
+                    input.className += 's1';
                 } else if (y < 6) {
-                    node.className += 's2';
+                    input.className += 's2';
                 } else {
-                    node.className += 's3';
+                    input.className += 's3';
                 }
             } else if (x < 6) {
                 if (y < 3) {
-                    node.className += 's4';
+                    input.className += 's4';
                 } else if (y < 6) {
-                    node.className += 's5';
+                    input.className += 's5';
                 } else {
-                    node.className += 's6';
+                    input.className += 's6';
                 }
             } else if (x < 9) {
                 if (y < 3) {
-                    node.className += 's7';
+                    input.className += 's7';
                 } else if (y < 6) {
-                    node.className += 's8';
+                    input.className += 's8';
                 } else {
-                    node.className += 's9';
+                    input.className += 's9';
                 }
             }
-            node.className += ` n${(x * 9) + y}`;
-            
-            node.addEventListener('dblclick',function(){node.value=''});
-            node.addEventListener('keypress',
+            input.setAttribute('maxlength', '1');
+            input.addEventListener('dblclick',function(){input.value=''});
+            input.addEventListener('keypress',
             function(key) {
                 if(key.key == '1' || key.key == '2' || key.key == '3' || key.key == '4' || key.key == '5' || key.key == '6' || key.key == '7' || key.key == '8' || key.key == '9') {
-                    node.value = key.key;
+                    input.value = key.key;
                     validateBoard(this);
                 }
             });
-            board.appendChild(node);
+
+            let overlay = document.createElement('div');
+            overlay.className = 'node-overlay';
+            for (let i = 1; i <= 9; i++) {
+                let sub = document.createElement('div');
+                let subText = document.createElement('span');
+                subText.innerHTML = i;
+                sub.className = 'node-overlay-sub';
+                sub.appendChild(subText);
+                overlay.appendChild(sub);
+            }
+
+            wrapper.appendChild(input);
+            wrapper.appendChild(overlay);
+            board.appendChild(wrapper);
         }
     }
 }
@@ -422,6 +484,10 @@ const openOverlay = () => {
 }
 
 const closeOverlay = () => {
+    resultItems = document.querySelectorAll('.win__overlay-results-item');
+    for (let i = 0; i < resultItems.length; i++) {
+        resultItems[i].style.transform = 'translateY(800px)';
+    }
     $('.win').css('display', 'none');
     if (gameWon == false) {
         startTimer();
