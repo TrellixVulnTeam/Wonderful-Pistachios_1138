@@ -5,6 +5,7 @@ let correctMoves = 0;
 let moves = [0,0,0];
 let gameWon = false;
 let percent = 100;
+let mouseMode = false;
 
 let mins = 0;
 let seconds = 0;
@@ -44,6 +45,8 @@ $('.info__instruction-box-btn').on('mousedown', function() {
             for (let i = 0; i < overlays.length; i++) {
                 overlays[i].style.display = 'block';
                 displayValuesBoard();
+                mouseMode = true;
+                mouseMove();
             }
         }
     }
@@ -51,6 +54,20 @@ $('.info__instruction-box-btn').on('mousedown', function() {
         // alert('highlights');
     }
 });
+
+const mouseMove = () => {
+    $('.node-overlay-sub').on('click', function(event) {
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        let el = $(this);
+        let value = el[0].innerText;
+        let overlay = el[0].parentElement;
+        let input = overlay.previousSibling;
+        overlay.style.display = 'none';
+        input.value = value;
+        validateBoard(input);
+    });
+}
 
 const animateOverlay = () => {
     document.querySelector('#progressContainer').innerHTML = '';
@@ -282,10 +299,20 @@ const validateBoard = (obj) => {
         nodeFeedbackAnimation(obj.classList[3]); //Square
         moves[0]++;
         moves[2] = 0;
+        obj.disabled = true;
     } else {
         obj.classList.add('node__incorrect');
+        obj.focus();
         moves[1]++;
         moves[2] = 1;
+        if (mouseMode) {
+            setTimeout(function() {
+                obj.classList.remove('node__incorrect');
+                obj.value = '';
+                obj.nextSibling.style.display = 'block';
+                obj.blur();
+            }, 500);
+        }
     }
     updateMoves();
     if (checkWin()) {
@@ -323,7 +350,7 @@ const updateMoves = () => {
 }
 
 const nodeFeedbackAnimation = (objClass) => {
-    let columnNodes = document.querySelectorAll(`.${objClass}`);
+    let columnNodes = document.querySelectorAll(`input.${objClass}`);
     let curVals = [];
     for (let x = 0; x < 9; x++) {
         if (columnNodes[x].value == '') {}
@@ -387,36 +414,36 @@ const generateBoardHTML = () => {
 
             let input = document.createElement('input');
             input.className = 'node ';
-            input.className += ` c${y} `;
+            input.className += `c${y} `;
             wrapper.className += `c${y} `;
-            input.className += `r${x}`;
+            input.className += `r${x} `;
             wrapper.className += `r${x} `;
-            input.className += `n${(x * 9) + y} `;
             if (x < 3) {
                 if (y < 3) {
-                    input.className += 's1';
+                    input.className += 's1 ';
                 } else if (y < 6) {
-                    input.className += 's2';
+                    input.className += 's2 ';
                 } else {
-                    input.className += 's3';
+                    input.className += 's3 ';
                 }
             } else if (x < 6) {
                 if (y < 3) {
-                    input.className += 's4';
+                    input.className += 's4 ';
                 } else if (y < 6) {
-                    input.className += 's5';
+                    input.className += 's5 ';
                 } else {
-                    input.className += 's6';
+                    input.className += 's6 ';
                 }
             } else if (x < 9) {
                 if (y < 3) {
-                    input.className += 's7';
+                    input.className += 's7 ';
                 } else if (y < 6) {
-                    input.className += 's8';
+                    input.className += 's8 ';
                 } else {
-                    input.className += 's9';
+                    input.className += 's9 ';
                 }
             }
+            input.className += `n${(x * 9) + y}`;
             input.setAttribute('maxlength', '1');
             input.addEventListener('dblclick',function(){input.value=''});
             input.addEventListener('keypress',

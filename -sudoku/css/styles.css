@@ -359,7 +359,7 @@ body {
   height: 100%; }
   .node__correct {
     background-color: #75ec75 !important;
-    color: white; }
+    color: white !important; }
   .node__incorrect {
     background-color: white;
     color: #b9adad; }
@@ -411,7 +411,8 @@ body {
     height: calc(100%/3);
     position: relative;
     margin: 0;
-    border-radius: 2px; }
+    border-radius: 2px;
+    z-index: 1000; }
     .node-overlay-sub:hover {
       background-color: #2ee6e6;
       color: white;
@@ -421,7 +422,7 @@ body {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 1vw; }
+      font-size: 1.8vw; }
 
 .btn {
   display: block;
