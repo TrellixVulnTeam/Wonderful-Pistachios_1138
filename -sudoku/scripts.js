@@ -69,7 +69,7 @@ const animateOverlay = () => {
             progressText.innerText = '';
             progressText.appendChild(gradeSpan);
             progressText.style.opacity = '1';
-            setTimeout(animateResultsList, 500);
+            setTimeout(animateResultsList, 0);
         }, 500)
     }, 1400)
 }
@@ -77,8 +77,8 @@ const animateOverlay = () => {
 const animateResultsList = () => {
     resultItems = document.querySelectorAll('.win__overlay-results-item');
     delay = 0;
-    for (let i = resultItems.length; i >= 0; i--) {
-        delay += 200;
+    for (let i = 0; i < resultItems.length; i++) {
+        delay += 500;
         setTimeout(function() {
             resultItems[i].style.transform = 'translateY(0)';
         }, delay);
@@ -386,7 +386,7 @@ const generateBoardHTML = () => {
 const getScore = () => {
     let totalSeconds = mins*60 + seconds;
     let percentDiv = document.querySelector('.results__grade-percent');
-    let gradeDiv = document.querySelector('.results__grade-letter');
+    let gradeDiv = document.querySelector('.results__grade-letter-content');
     percent = 100 - parseInt(totalSeconds/10) - moves[1];
     percentDiv.innerHTML = `${percent}%`;
     if (percent >= 90) {
@@ -405,10 +405,13 @@ const getScore = () => {
     gradeDiv.appendChild(modifier);
     if (percent % 10 > 6 || percent == 100) {
         modifier.innerHTML += '+';
+        gradeDiv.style.transform = 'translateX(-3rem)';
     } else if (percent % 10 > 2) {
         // Nothing
+        gradeDiv.style.transform = 'translateX(0)';
     } else {
         modifier.innerHTML += '-';
+        gradeDiv.style.transform = 'translateX(-3rem)';
     }
 }
 

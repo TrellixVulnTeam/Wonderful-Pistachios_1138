@@ -68,6 +68,13 @@ body {
     height: 20%;
     position: relative;
     border-bottom: 3px solid #e0dada; }
+    .info__title-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 95%;
+      height: 95%; }
     .info__title-text {
       position: absolute;
       top: 50%;
@@ -76,12 +83,12 @@ body {
       font-size: 6.5vw;
       font-weight: 400;
       font-family: 'Playfair Display';
-      line-height: 1.2;
+      line-height: 1.3;
       border-radius: 5px;
       color: white;
       background-color: #2ee6e6;
-      width: 95%;
       padding: 20px auto;
+      height: 100%;
       border: 3px solid #e0dada;
       border-bottom: 3px solid #e0dada; }
   .info__difficulty {
@@ -273,7 +280,8 @@ body {
       width: 100%;
       height: 33%;
       line-height: 1.2;
-      background-color: #00ffff; }
+      background-color: #00ffff;
+      text-shadow: 0 0 2px #e0dada; }
     .results__grade-letter {
       font-size: 18vw;
       line-height: 1;
@@ -281,6 +289,8 @@ body {
       width: 100%;
       background-color: #2ee6e6;
       position: relative; }
+      .results__grade-letter-content {
+        transform: translateX(-10%); }
       .results__grade-letter-modifier {
         position: absolute;
         font-size: 6vw;
@@ -373,7 +383,9 @@ body {
     .win__overlay-heading {
       width: 100%;
       height: 15%;
-      font-size: 6rem;
+      font-size: 5vw;
+      line-height: 1.2;
+      letter-spacing: 3px;
       background-color: #2ee6e6;
       color: white;
       border-bottom: 5px solid white; }
@@ -408,6 +420,7 @@ body {
       height: 85%;
       float: left; }
       .win__overlay-results-item {
+        box-sizing: border-box;
         width: 95%;
         border-radius: 5px;
         background-color: #2ee6e6;
@@ -416,8 +429,14 @@ body {
         font-size: 1.8vw;
         margin: calc((100% - (5 * 1.6vw)) / 10) auto;
         font-weight: bold;
-        transform: translateY(-1000px);
-        transition: transform 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6); }
+        transform: translateY(800px);
+        transition: transform 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+        overflow: hidden; }
+        .win__overlay-results-item:hover {
+          color: #52cccc;
+          background-color: white;
+          text-shadow: none;
+          cursor: pointer; }
   .win__close {
     position: absolute;
     top: 15px;
