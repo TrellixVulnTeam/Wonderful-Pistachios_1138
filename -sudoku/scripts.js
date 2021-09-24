@@ -6,6 +6,7 @@ let moves = [0,0,0];
 let gameWon = false;
 let percent = 100;
 let mouseMode = false;
+let optionFunctionality = false;
 
 let mins = 0;
 let seconds = 0;
@@ -21,50 +22,66 @@ for (let x = 0; x < difficultyChoice.length; x++) {
         difficultyChoice[x].classList.add('btn-active');
     });
 }
-$('.results__grade-overlay').on('click', function(){openOverlay();});
 
-$('.info__instruction-box-btn').on('mousedown', function() {
-    let slider = $(this).children();
-    slider = slider[1];
-    let overlays = document.querySelectorAll('.node-overlay');
-    if (slider.style.zIndex == 500) {
-        slider.style.transform = 'translateX(-100%)';
-        setTimeout(function() {
-            slider.style.zIndex = '-1000';
-        }, 200);
-        if (slider.classList.contains('mouse-mode')) {
-            for (let i = 0; i < overlays.length; i++) {
-                overlays[i].style.display = 'none';
-                displayValuesBoard();
-                mouseMode = false;
+const setOptionFunctionality = () => {
+    $('.info__instruction-box-btn').on('mousedown', function() {
+        let slider = $(this).children();
+        slider = slider[1];
+        let overlays = document.querySelectorAll('.node-overlay');
+        if (slider.style.zIndex == 500) {
+            slider.style.transform = 'translateX(-100%)';
+            setTimeout(function() {
+                slider.style.zIndex = '-1000';
+            }, 200);
+            if (slider.classList.contains('mouse-mode')) {
+                for (let i = 0; i < overlays.length; i++) {
+                    overlays[i].style.display = 'none';
+                    displayValuesBoard();
+                    mouseMode = false;
+                }
+            }
+            if (slider.classList.contains('highlights')) {
+                $('.node').off();
+                $('.node-overlay-sub').off();
+            }
+        } else {
+            slider.style.zIndex = '500';
+            slider.style.transform = 'translateX(0)';
+            if (slider.classList.contains('mouse-mode')) {
+                for (let i = 0; i < overlays.length; i++) {
+                    overlays[i].style.display = 'block';
+                    displayValuesBoard();
+                    mouseMode = true;
+                    mouseMove();
+                }
+            }
+            if (slider.classList.contains('highlights')) {
+                $('.node').on('mouseenter', function() {
+                    highlight($(this)[0], true);
+                });
+                $('.node').on('mouseleave', function() {
+                    highlight($(this)[0], false);
+                });
+                $('.node-overlay-sub').on('mouseenter', function() {
+                    let node = $(this)[0].parentElement.previousSibling;
+                    highlight(node, true);
+                });
+                $('.node-overlay-sub').on('mouseleave', function() {
+                    let node = $(this)[0].parentElement.previousSibling;
+                    highlight(node, false);
+                });
             }
         }
-    } else {
-        slider.style.zIndex = '500';
-        slider.style.transform = 'translateX(0)';
-        if (slider.classList.contains('mouse-mode')) {
-            for (let i = 0; i < overlays.length; i++) {
-                overlays[i].style.display = 'block';
-                displayValuesBoard();
-                mouseMode = true;
-                mouseMove();
-            }
-        }
-        if (slider.classList.contains('highlights')) {
-            $('.node').on('mouseover', function() {
-                highlight($(this)[0]);
-            });
-        }
-    }
-});
+    });
+}
 
 const mouseMove = () => {
     $('.node-overlay-sub').on('click', function(event) {
         event.stopPropagation();
         event.stopImmediatePropagation();
-        let el = $(this);
-        let value = el[0].innerText;
-        let overlay = el[0].parentElement;
+        let el = $(this)[0];
+        let value = el.innerText;
+        let overlay = el.parentElement;
         let input = overlay.previousSibling;
         overlay.style.display = 'none';
         input.value = value;
@@ -250,9 +267,16 @@ const generateBoard = () => {
     if (timex) {
         clearTimeout(timex);
     }
+    if (!optionFunctionality) {
+        setOptionFunctionality();
+        optionFunctionality = true;
+    }
 
-    let difficulty = document.querySelectorAll('.btn-active');
-    board = document.sudoku.generate(difficulty[0].innerHTML.toLowerCase());
+    let difficulty = document.querySelectorAll('.btn-active')[0].innerHTML.toLowerCase();
+    if (difficulty == 'harder') {
+        difficulty = 'very-hard';
+    }
+    board = document.sudoku.generate(difficulty);
     solvedBoard = document.sudoku.solve(board);
     startTimer();
     displayValuesBoard();
@@ -320,7 +344,7 @@ const validateBoard = (obj) => {
     updateMoves();
     if (checkWin()) {
         clearTimeout(timex);
-        alert('Win');
+        openOverlay();
     }
 }
 
@@ -330,6 +354,7 @@ const checkWin = () => {
             return false;
         }
     }
+    gameWon = true;
     return true;
 }
 
@@ -352,16 +377,32 @@ const updateMoves = () => {
     }
 }
 
-const highlight = (obj) => {
-    console.log(obj);
+const highlight = (obj, on) => {3
     let columnNodes = document.querySelectorAll(`input.${obj.classList[1]}`);
     let rowNodes = document.querySelectorAll(`input.${obj.classList[2]}`);
     let squareNodes = document.querySelectorAll(`input.${obj.classList[3]}`);
     let fullSet = [columnNodes, rowNodes, squareNodes];
     for (let x = 0; x < 3; x++) {
         for (let y = 0; y < 9; y++) {
-            fullSet[x][y].classList.add('highlight');
+            if (on) {
+                fullSet[x][y].classList.add('highlight');
+            } else {
+                fullSet[x][y].classList.remove('highlight');
+            }
         }
+    }
+    if (mouseMode) {
+        let subs = obj.nextSibling.children
+        if (on) {
+            for (let i = 0; i < subs.length; i++) {
+                subs[i].classList.add('highlight-sub');
+            }
+        } else {
+            for (let i = 0; i < subs.length; i++) {
+                subs[i].classList.remove('highlight-sub');
+            }
+        }
+        
     }
 }
 
@@ -403,7 +444,7 @@ const nodeFeedbackAnimation = (objClass) => {
 }
 
 const animateNodes = () => {
-    let nodes = document.querySelectorAll('.node');
+    let nodes = document.querySelectorAll('.node-wrap');
     let index = 0;
     for (let i =0; i < 81; i++) {
         nodes[i].style.display = 'none';
@@ -422,7 +463,7 @@ const animateNodes = () => {
 }
 
 const generateBoardHTML = () => {
-    const board = document.querySelector('.board');
+    let boardDiv = document.querySelector('.board');
     for (let x = 0; x < 9; x++) {
         for (let y = 0; y < 9; y++) {
             let wrapper = document.createElement('div');
@@ -462,11 +503,15 @@ const generateBoardHTML = () => {
             input.className += `n${(x * 9) + y}`;
             input.setAttribute('maxlength', '1');
             input.addEventListener('dblclick',function(){input.value=''});
-            input.addEventListener('keypress',
+            input.addEventListener('keydown',
             function(key) {
                 if(key.key == '1' || key.key == '2' || key.key == '3' || key.key == '4' || key.key == '5' || key.key == '6' || key.key == '7' || key.key == '8' || key.key == '9') {
                     input.value = key.key;
                     validateBoard(this);
+                } else {
+                    setTimeout(function(){
+                        input.value = '';
+                    }, 100);
                 }
             });
 
@@ -483,7 +528,7 @@ const generateBoardHTML = () => {
 
             wrapper.appendChild(input);
             wrapper.appendChild(overlay);
-            board.appendChild(wrapper);
+            boardDiv.appendChild(wrapper);
         }
     }
 }
@@ -532,7 +577,7 @@ const closeOverlay = () => {
         resultItems[i].style.transform = 'translateY(800px)';
     }
     $('.win').css('display', 'none');
-    if (gameWon == false) {
+    if (!gameWon) {
         startTimer();
     }
 }
