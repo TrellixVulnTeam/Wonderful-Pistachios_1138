@@ -155,7 +155,7 @@ const animateResultsList = () => {
 
 const getResultsContent = (resultItems) => {
     resultItems[0].innerHTML = `You solved the puzzle in ${document.querySelector('.results__timer-text').textContent.split(" ").join("")}`;
-    resultItems[1].innerHTML = `You made a move every ${seconds > 0 && moves[0] > 0 && moves[1] > 0 ? parseInt(((mins > 0 ? mins * 60 : 0) + seconds) / (moves[0] + moves[1])) : 0} seconds`;
+    resultItems[1].innerHTML = `You made a move every ${seconds > 0 && moves[0] > 0 && moves[1] > 0 ? (((mins > 0 ? mins * 60 : 0) + seconds) / (moves[0] + moves[1])).toFixed(2) : 0} seconds`;
     resultItems[2].innerHTML = `Your moves were ${moves[0] > 0 && moves[1] > 0 ? parseInt((moves[0] / (moves[0] + moves[1])) * 100) : 0}% correct`;
     resultItems[3].innerHTML = `You completed the puzzle on ${document.querySelector('.btn-active').innerHTML} difficulty`;
     resultItems[4].innerHTML = `Your global ranking for this difficulty is ${parseInt(Math.random() * 1000)}`;
