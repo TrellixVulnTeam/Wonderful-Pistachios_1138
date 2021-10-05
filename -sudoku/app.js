@@ -1,41 +1,67 @@
 const express = require('express');
 const app = express();
-const port = 4000;
+const port = 3000;
 const bodyParser = require('body-parser');
-const { SERVER_ROOT_URI, GOOGLE_CLIENT_ID } = require('./config');
-const redirectURI = "auth/google";
+const cors = require('cors');
+const passport = require('passport');
+const cookieSession = require('cookie-session');
+require('./passport-setup');
 app.use(express.static(__dirname + '/public'));
-var querystring = require('query-string');
-
-function getGoogleAuthURL() {
-    const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
-    const options = {
-        redirect_uri: `${SERVER_ROOT_URI}/${redirectURI}`,
-        client_id: GOOGLE_CLIENT_ID,
-        access_type: "offline",
-        response_type: "code",
-        prompt: "consent",
-        scope: [
-            "https://www.googleapis.com/auth/userinfo.profile",
-            "https://www.googleapis.com/auth/userinfo.email"
-        ].join(" ")
-    };
-
-    return `${rootUrl}?${querystring.stringify(options)}`;
+app.use(cors());
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json());
+app.use(cookieSession({
+  name: 'tuto-session',
+  keys: ['key1', 'key2']
+}))
+const isLoggedIn = (req,res,next) => {
+  if (req.user) {
+    Logged = 'logout';
+    next();
+  } else {
+    Logged = 'google';
+    next();
+  }
 }
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.get("/auth/google/url", (req, res) => {
-    return res.send(getGoogleAuthURL());
+app.set('view engine', 'ejs');
+
+var PopUp = {message: 'Hello', display: 'none', color: 'rgb(118, 228, 118)'}
+var Logged = 'google';
+
+app.get('/', isLoggedIn, (req, res) => {res.render('index', {popUp: PopUp, logged: Logged})});
+app.get('/failed', (req, res) => res.send('Failed login'));
+app.get('/good', (req, res) => {
+  PopUp.message = `Welcome ${req.user.displayName}`;
+  PopUp.display = 'block';
+  PopUp.color = 'rgb(118, 228, 118)';
+  res.redirect('/');
 });
 
-app.get("/auth/google", (req, res) => {
-  return res.send('potato');
-});
+app.get('/google',
+        passport.authenticate('google',
+                              {scope: ['email','profile']}
+));
 
-app.get('/', (req, res) => {
-  res.render('index');
+app.get('/google/callback',
+        passport.authenticate( 'google',
+                              {failureRedirect: '/failed'}),
+        function(req, res) {
+          res.redirect('/good');
+        }
+);
+
+app.get('/logout', (req,res) => {
+  PopUp.message = 'Goodbye!';
+  PopUp.display = 'block';
+  PopUp.color = 'rgb(241, 85, 85)';
+  req.session = null;
+  req.logout();
+  res.redirect('/');
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Example app listening at http://localhost:${port}`);
 })

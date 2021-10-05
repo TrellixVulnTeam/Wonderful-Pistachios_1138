@@ -47,3 +47,19 @@
         transform: translateY(-100%);
     }
 }
+
+@keyframes alertSlide {
+    0% {
+        transform: translateX(-2000px);
+    }
+    33% {
+        transform: translateX(0);
+    }
+    66% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
