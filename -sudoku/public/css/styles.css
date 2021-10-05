@@ -341,16 +341,16 @@ body {
       flex-direction: row; }
     .results__grade-percent {
       font-size: 6vw;
-      width: 67%;
+      width: 65%;
       height: 100%;
       line-height: 1.5;
       background-color: #00ffff;
       text-shadow: 0 0 2px #e0dada; }
     .results__grade-letter {
       font-size: 8vw;
-      line-height: 1.2;
+      line-height: 1.1;
       height: 100%;
-      width: 33%;
+      width: 35%;
       background-color: #2ee6e6;
       position: relative; }
       .results__grade-letter-content {
@@ -378,21 +378,24 @@ body {
       width: 100%;
       height: 100%;
       position: relative;
-      background: white;
+      background: #2ee6e6;
       text-align: center;
       overflow: hidden; }
       .results__menu-login-google {
         object-fit: contain;
         width: 100%;
         height: 100%;
-        transition: all .4s; }
+        transition: all .4s;
+        background-color: white; }
       .results__menu-login-subtitle-1 {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        font-size: 1.2vw;
-        padding: 5px 0;
+        font-size: 1.5vw;
+        height: 20%;
+        padding: 3px 0;
+        line-height: 1.7;
         z-index: 1000;
         background: #2ee6e6;
         color: white;
@@ -404,19 +407,50 @@ body {
         bottom: 0;
         left: 0;
         width: 100%;
-        padding: 5px 0;
+        height: 20%;
+        padding: 3px 0;
         z-index: 1000;
-        font-size: 1.2vw;
+        font-size: 1.5vw;
+        line-height: 1.7;
         background: #2ee6e6;
         color: white;
         transform: translateX(-100%);
         transition: all .4s;
         border-top: 3px solid #e0dada; }
+      .results__menu-login-in {
+        position: absolute;
+        top: 20%;
+        right: 0;
+        width: 37.5%;
+        font-size: 2.3vw;
+        line-height: 2;
+        height: 30%;
+        background: #76e476;
+        transform: translateX(100%);
+        transition: all .4s;
+        color: white;
+        text-decoration: none; }
+      .results__menu-login-out {
+        color: white;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 37.5%;
+        font-size: 2.3vw;
+        line-height: 2;
+        height: 30%;
+        background: rgba(241, 85, 85, 0.884);
+        transform: translateX(100%);
+        transition: all .4s;
+        text-decoration: none; }
+      .results__menu-login:hover .results__menu-login-in,
+      .results__menu-login:hover .results__menu-login-out {
+        transform: translateX(0); }
       .results__menu-login:hover .results__menu-login-subtitle-1,
       .results__menu-login:hover .results__menu-login-subtitle-2 {
         transform: translateX(0); }
       .results__menu-login:hover .results__menu-login-google {
-        transform: scale(0.6) rotate(360deg); }
+        transform: scale(0.65) rotate(360deg) translateX(-30%); }
 
 .node {
   margin: 0;
