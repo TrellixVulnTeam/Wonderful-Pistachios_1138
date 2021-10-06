@@ -75,7 +75,7 @@ body {
   width: 25%;
   background-color: #52cccc;
   text-align: center;
-  border: 3px solid #e0dada;
+  border: 5px solid #e0dada;
   z-index: 1000; }
   .info__title {
     width: 100%;
@@ -108,7 +108,7 @@ body {
       border-bottom: 3px solid #e0dada; }
   .info__difficulty {
     width: 100%;
-    height: 25%;
+    height: 20%;
     position: relative;
     border-bottom: 3px solid #e0dada; }
     .info__difficulty-container {
@@ -116,18 +116,16 @@ body {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 95%;
-      height: 90%; }
+      width: 98%;
+      height: 100%; }
     .info__difficulty-row {
       display: flex;
       margin: 0 auto;
       border-top: none;
       border-left: none;
       border-right: none;
-      height: 48%;
+      height: 50%;
       padding: 3% 0; }
-      .info__difficulty-row:first-child {
-        margin-bottom: 2%; }
     .info__difficulty-btn {
       border: none;
       display: inline-block;
@@ -164,7 +162,7 @@ body {
       line-height: 1;
       padding-bottom: .6rem;
       height: 80%;
-      width: 90% !important;
+      width: 95% !important;
       background-color: #2ee6e6;
       color: white;
       border: 3px solid #e0dada;
@@ -179,33 +177,32 @@ body {
   .info__instruction {
     width: 100%;
     margin: 0 auto;
-    height: 40%;
+    height: 45%;
     border-radius: 5px;
-    position: relative;
-    font-family: 'Playfair Display'; }
+    position: relative; }
     .info__instruction-box {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background-color: white;
-      border: 3px solid #e0dada;
       width: 90%;
       height: 90%;
       margin: 0 auto;
       border-radius: 5px; }
       .info__instruction-box-btn {
+        border: 3px solid #e0dada;
         position: relative;
         text-align: center;
         background-color: rgba(241, 85, 85, 0.884);
-        height: 50%;
+        height: 32%;
         color: white;
         font-size: 4vw;
-        line-height: 2.2;
+        line-height: 1.6;
         width: 100%;
         cursor: pointer; }
-        .info__instruction-box-btn:first-child {
-          border-bottom: 3px solid #e0dada; }
+        .info__instruction-box-btn:not(:last-child) {
+          border-bottom: 3px solid #e0dada;
+          margin-bottom: 2%; }
       .info__instruction-box-label {
         width: 60%;
         height: 100%;
@@ -215,7 +212,8 @@ body {
         position: relative;
         float: left;
         z-index: 1000;
-        border-right: 3px solid #e0dada; }
+        border-right: 3px solid #e0dada;
+        font-family: 'Playfair Display'; }
         .info__instruction-box-label-text {
           position: absolute;
           top: 50%;
@@ -235,13 +233,15 @@ body {
 .board {
   width: 50%;
   height: 100%;
-  background-color: #00ffff; }
+  background-color: #00ffff;
+  border-top: 5px solid #e0dada;
+  border-bottom: 5px solid #e0dada; }
 
 .results {
   width: 25%;
   background-color: #52cccc;
   text-align: center;
-  border: 3px solid #e0dada;
+  border: 5px solid #e0dada;
   z-index: 1000; }
   .results__timer {
     position: relative;
@@ -315,8 +315,9 @@ body {
       display: block; }
     .results__moves-label {
       font-size: 1.5vw;
-      line-height: 2;
-      color: white; }
+      line-height: 2.2;
+      color: white;
+      font-family: "Playfair Display"; }
   .results__grade {
     width: 100%;
     height: 20%;
@@ -328,7 +329,7 @@ body {
       left: 50%;
       transform: translate(-50%, -50%);
       width: 90%;
-      height: 90%;
+      height: 80%;
       background-color: transparent;
       margin: 0 auto;
       display: flex;
@@ -343,12 +344,12 @@ body {
       font-size: 6vw;
       width: 65%;
       height: 100%;
-      line-height: 1.5;
+      line-height: 1.35;
       background-color: #00ffff;
       text-shadow: 0 0 2px #e0dada; }
     .results__grade-letter {
       font-size: 8vw;
-      line-height: 1.1;
+      line-height: 1;
       height: 100%;
       width: 35%;
       background-color: #2ee6e6;
@@ -358,13 +359,14 @@ body {
       .results__grade-letter-modifier {
         position: absolute;
         font-size: 2vw;
-        top: 50%;
+        top: 60%;
         left: 95%;
         transform: translate(-50%, -50%); }
   .results__menu {
     position: relative;
     height: 35%;
-    width: 100%; }
+    width: 100%;
+    font-family: "Playfair Display"; }
     .results__menu-container {
       position: absolute;
       width: 90%;
@@ -378,7 +380,7 @@ body {
       width: 100%;
       height: 100%;
       position: relative;
-      background: #2ee6e6;
+      background: white;
       text-align: center;
       overflow: hidden; }
       .results__menu-login-google {
@@ -392,7 +394,7 @@ body {
         top: 0;
         left: 0;
         width: 100%;
-        font-size: 1.5vw;
+        font-size: 1.4vw;
         height: 20%;
         padding: 3px 0;
         line-height: 1.7;
@@ -410,7 +412,7 @@ body {
         height: 20%;
         padding: 3px 0;
         z-index: 1000;
-        font-size: 1.5vw;
+        font-size: 1.4vw;
         line-height: 1.7;
         background: #2ee6e6;
         color: white;
@@ -450,7 +452,7 @@ body {
       .results__menu-login:hover .results__menu-login-subtitle-2 {
         transform: translateX(0); }
       .results__menu-login:hover .results__menu-login-google {
-        transform: scale(0.65) rotate(360deg) translateX(-30%); }
+        transform: scale(0.5) rotate(360deg); }
 
 .node {
   margin: 0;
@@ -492,13 +494,13 @@ body {
   width: calc(100%/9);
   height: calc(100%/9); }
   .node-wrap.c2 {
-    border-right: 3px solid #b9adad; }
+    border-right: 5px solid #e0dada; }
   .node-wrap.c5 {
-    border-right: 3px solid #b9adad; }
+    border-right: 5px solid #e0dada; }
   .node-wrap.r2 {
-    border-bottom: 3px solid #b9adad; }
+    border-bottom: 5px solid #e0dada; }
   .node-wrap.r5 {
-    border-bottom: 3px solid #b9adad; }
+    border-bottom: 5px solid #e0dada; }
 
 .node-overlay {
   display: none;

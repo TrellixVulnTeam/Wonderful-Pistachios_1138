@@ -360,6 +360,11 @@ const checkWin = () => {
 
 const updateMoves = () => {
     let moveSpans = document.querySelectorAll('.results__moves-output-label');
+    if (moves[0] > 99) {
+        moves[0] = 99;
+    } else if (moves[1] > 99) {
+        moves[1] = 99;
+    }
     for (let i = 0; i < 2; i++) {
         moveSpans[i].style.animation = 'none';
         window.requestAnimationFrame(function(time) {
@@ -503,7 +508,7 @@ const generateBoardHTML = () => {
             input.className += `n${(x * 9) + y}`;
             input.setAttribute('maxlength', '1');
             input.addEventListener('dblclick',function(){input.value=''});
-            input.addEventListener('keydown',
+            input.addEventListener('keyup',
             function(key) {
                 if(key.key == '1' || key.key == '2' || key.key == '3' || key.key == '4' || key.key == '5' || key.key == '6' || key.key == '7' || key.key == '8' || key.key == '9') {
                     input.value = key.key;
@@ -538,6 +543,9 @@ const getScore = () => {
     let percentDiv = document.querySelector('.results__grade-percent');
     let gradeDiv = document.querySelector('.results__grade-letter-content');
     percent = 100 - parseInt(totalSeconds/10) - moves[1];
+    if (percent < 0) {
+        percent = 0;
+    }
     percentDiv.innerHTML = `${percent}%`;
     if (percent >= 90) {
         gradeDiv.innerHTML = 'A';
@@ -582,6 +590,49 @@ const closeOverlay = () => {
     if (!gameWon) {
         startTimer();
     }
+}
+
+const assist = () => {
+    let nodes = document.querySelectorAll('.node:not(:disabled)');
+    let counts = [];
+    let countReference = [];
+    for (let x = 0; x < nodes.length; x++) {
+        let colNodes = document.querySelectorAll(`input.${nodes[x].classList[1]}`); //Col
+        let rowNodes = document.querySelectorAll(`input.${nodes[x].classList[2]}`); //Row
+        let squareNodes = document.querySelectorAll(`input.${nodes[x].classList[3]}`); //Square
+        let numCount = 0;
+        for (let i = 0; i < colNodes.length; i++) {
+            if (colNodes[i].value.length > 0) {
+                numCount++;
+            }
+        }
+        for (let i = 0; i < rowNodes.length; i++) {
+            if (rowNodes[i].value.length > 0) {
+                numCount++;
+            }
+        }
+        for (let i = 0; i < squareNodes.length; i++) {
+            if (squareNodes[i].value.length > 0) {
+                numCount++;
+            }
+        }
+        counts.push(numCount);
+        countReference.push(nodes[x].classList[4]);
+    }
+    console.log(counts);
+    console.log(Math.max(...counts));
+    console.log(counts.indexOf(Math.max(...counts)));
+    let indexEasiest = counts.indexOf(Math.max(...counts));
+    let easiestNode = countReference[indexEasiest];
+    console.log(easiestNode);
+    console.log(document.querySelector(`.${easiestNode}`));
+    let node = document.querySelector(`.${easiestNode}`)
+    node.style.animation = 'none';
+    window.requestAnimationFrame(function(time) {
+        window.requestAnimationFrame(function(time) {
+            node.style.animation = 'spin .8s ease-out';
+        });
+    });
 }
 
 generateBoardHTML();
