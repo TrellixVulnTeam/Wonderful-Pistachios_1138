@@ -28,11 +28,11 @@ const setOptionFunctionality = () => {
         let slider = $(this).children();
         slider = slider[1];
         let overlays = document.querySelectorAll('.node-overlay');
-        if (slider.style.zIndex == 500) {
+        if (slider.style.zIndex == 1500) {
             slider.style.transform = 'translateX(-100%)';
             setTimeout(function() {
                 slider.style.zIndex = '-1000';
-            }, 200);
+            }, 400);
             if (slider.classList.contains('mouse-mode')) {
                 for (let i = 0; i < overlays.length; i++) {
                     overlays[i].style.display = 'none';
@@ -45,7 +45,7 @@ const setOptionFunctionality = () => {
                 $('.node-overlay-sub').off();
             }
         } else {
-            slider.style.zIndex = '500';
+            slider.style.zIndex = '1500';
             slider.style.transform = 'translateX(0)';
             if (slider.classList.contains('mouse-mode')) {
                 for (let i = 0; i < overlays.length; i++) {
@@ -457,12 +457,11 @@ const animateNodes = () => {
     const animateNode = () => {
         setTimeout(function() {
             nodes[index].style.display = 'inline-block';
-            nodes[index].style.animation = 'spinBottomRight .04s ease-in-out';
             index++;
             if (index < 81) {
                 animateNode();
             }
-        }, 10);
+        }, 4);
     }
     animateNode();
 }
@@ -634,5 +633,26 @@ const assist = () => {
         });
     });
 }
+
+$('.results__menu-login').on('mouseenter', () => {
+    setTimeout(() => {
+        if ($(".results__menu-login:hover").length != 0) {
+            let logo = $('.results__menu-login-google')[0];
+            logo.src = "img/google-logo.png";
+            setTimeout(() => {
+                logo.style.transition = "all .2s cubic-bezier(0.87, 0, 0.13, 1)"
+                logo.style.transform = "scale(1) rotate(360deg)";
+                logo.style.opacity = '1';
+            }, 50)
+        }
+    }, 200)
+})
+$('.results__menu-login').on('mouseleave', () => {
+    let logo = $('.results__menu-login-google')[0];
+    logo.style.removeProperty('transition');
+    logo.style.removeProperty('opacity');
+    logo.style.removeProperty('transform');
+    logo.src = "img/google_logo.png";
+})
 
 generateBoardHTML();
