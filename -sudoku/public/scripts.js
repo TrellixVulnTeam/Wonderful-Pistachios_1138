@@ -409,6 +409,7 @@ const highlight = (obj, on) => {3
         }
         
     }
+    obj.classList.remove('highlight');
 }
 
 const nodeFeedbackAnimation = (objClass) => {

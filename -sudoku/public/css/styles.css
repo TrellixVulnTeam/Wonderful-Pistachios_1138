@@ -11,7 +11,8 @@ html {
 body {
   box-sizing: border-box;
   line-height: 1.7;
-  overflow: hidden; }
+  overflow: hidden;
+  text-shadow: 1px 1px 1px #e0dada; }
 
 @keyframes spin {
   0% {
@@ -81,7 +82,6 @@ body {
   width: 24%;
   background-color: #52cccc;
   text-align: center;
-  border: 5px solid #e0dada;
   z-index: 1000; }
   .info__title {
     width: 100%;
@@ -199,13 +199,14 @@ body {
         border: 3px solid #e0dada;
         position: relative;
         text-align: center;
-        background-color: rgba(241, 85, 85, 0.884);
+        background-color: #f15555;
         height: 32%;
         color: white;
         font-size: 4vw;
         line-height: 1.6;
         width: 100%;
-        cursor: pointer; }
+        cursor: pointer;
+        border-radius: 5px; }
         .info__instruction-box-btn:not(:last-child) {
           border-bottom: 3px solid #e0dada;
           margin-bottom: 2%; }
@@ -239,15 +240,13 @@ body {
 .board {
   width: 52%;
   height: 100%;
-  background-color: #00ffff;
-  border-top: 5px solid #e0dada;
-  border-bottom: 5px solid #e0dada; }
+  background-color: #2ee6e6;
+  border: 1px solid #e0dada; }
 
 .results {
   width: 24%;
   background-color: #52cccc;
   text-align: center;
-  border: 5px solid #e0dada;
   z-index: 1000; }
   .results__timer {
     position: relative;
@@ -308,7 +307,7 @@ body {
       position: relative;
       transition: all .5s ease-in-out; }
     .results__moves-output-2 {
-      background-color: rgba(241, 85, 85, 0.884);
+      background-color: #f15555;
       height: 70%;
       border-bottom: 2px solid #e0dada;
       overflow: hidden;
@@ -440,42 +439,55 @@ body {
   font-size: 3.5vw;
   text-align: center;
   outline: none;
-  text-shadow: 0px 0px 1px #b9adad;
+  color: #2ee6e6;
   border: none;
-  border-bottom: 1px solid #b9adad;
-  border-right: 1px solid #b9adad;
   transition: all .1s ease-in-out;
   width: 100%;
   height: 100%; }
   .node__correct {
     background-color: #76e476 !important;
-    color: white !important; }
+    color: white !important;
+    text-shadow: 1px 1px 1px #e0dada; }
   .node__incorrect {
-    background-color: white;
-    color: #b9adad; }
-    .node__incorrect:focus {
-      background-color: rgba(241, 85, 85, 0.884) !important;
-      color: white; }
-  .node:hover, .node:focus {
-    transform: scale(0.85);
-    border-radius: 5px;
+    background-color: #f15555 !important;
+    color: white !important;
+    text-shadow: 1px 1px 1px #e0dada; }
+    .node__incorrect:hover, .node__incorrect:focus {
+      border: none !important; }
+  .node:hover:not(:disabled), .node:focus {
     cursor: pointer;
-    color: transparent;
-    text-shadow: 0px 0px 1px white;
-    background-color: white; }
+    background-color: white;
+    text-shadow: 1px 1px 1px #e0dada;
+    border: 5px solid #00ffff; }
   .node:disabled {
     background-color: white;
-    color: #b9adad; }
-  .node.r0 {
-    border-top: 1px solid #b9adad; }
-  .node.c0 {
-    border-left: 1px solid #b9adad; }
+    text-shadow: 1px 1px 1px #e0dada;
+    color: #2ee6e6; }
+  .node.c2 {
+    box-shadow: 0.3rem 0rem 0.2rem rgba(0, 0, 0, 0.1); }
+    .node.c2.r2 {
+      box-shadow: 0.3rem 0.3rem 0.2rem rgba(0, 0, 0, 0.1); }
+    .node.c2.r5 {
+      box-shadow: 0.3rem 0.3rem 0.2rem rgba(0, 0, 0, 0.1); }
+  .node.c5 {
+    box-shadow: 0.3rem 0rem 0.2rem rgba(0, 0, 0, 0.1); }
+    .node.c5.r2 {
+      box-shadow: 0.3rem 0.3rem 0.2rem rgba(0, 0, 0, 0.1); }
+    .node.c5.r5 {
+      box-shadow: 0.3rem 0.3rem 0.2rem rgba(0, 0, 0, 0.1); }
+  .node.r2 {
+    box-shadow: 0rem 0.3rem 0.2rem rgba(0, 0, 0, 0.1); }
+  .node.r5 {
+    box-shadow: 0rem 0.3rem 0.2rem rgba(0, 0, 0, 0.1); }
 
 .node-wrap {
   position: relative;
   display: inline-block;
   width: calc(100%/9);
-  height: calc(100%/9); }
+  height: calc(100%/9);
+  border-bottom: 2px solid #e0dada;
+  border-right: 2px solid #e0dada;
+  background-color: white; }
   .node-wrap.c2 {
     border-right: 5px solid #e0dada; }
   .node-wrap.c5 {
@@ -484,30 +496,37 @@ body {
     border-bottom: 5px solid #e0dada; }
   .node-wrap.r5 {
     border-bottom: 5px solid #e0dada; }
+  .node-wrap.r0 {
+    border-top: 2px solid #e0dada; }
+  .node-wrap.c0 {
+    border-left: 2px solid #e0dada; }
 
 .node-overlay {
   display: none;
   position: absolute;
   top: 0;
   left: 0;
-  width: calc(100% - 1px);
-  height: calc(100% - 1px);
-  color: #b9adad; }
+  width: 100%;
+  height: 100%;
+  color: white;
+  text-shadow: 1px 1px 1px #e0dada; }
+  .node-overlay:hover {
+    background-color: #00ffff; }
   .node-overlay:hover .node-overlay-sub {
     display: block; }
   .node-overlay-sub {
     display: none;
     float: left;
-    width: calc(100%/3);
-    height: calc(100%/3);
+    width: calc((100% / 3));
+    height: calc((100% / 3));
+    border-radius: 3px;
     position: relative;
-    margin: 0;
-    border-radius: 2px;
+    padding: 1px;
     z-index: 1000;
     overflow: hidden; }
     .node-overlay-sub:hover {
-      background-color: #00ffff;
-      color: white;
+      background-color: white;
+      color: #00ffff !important;
       cursor: pointer; }
     .node-overlay-sub span {
       position: absolute;
@@ -628,8 +647,8 @@ body {
 
 .highlight {
   background-color: #00ffff !important;
-  color: transparent !important;
-  text-shadow: 0 0 1px white !important; }
+  color: white !important;
+  text-shadow: 1px 1px 1px #e0dada !important; }
   .highlight-sub {
     color: white; }
     .highlight-sub:hover {
